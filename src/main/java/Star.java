@@ -26,7 +26,7 @@ public class Star {
         System.out.println("bye bye! come by again soon :)\n");
     }
 
-    public static int readScanner() {
+    public static int Echo() {
         Scanner scanner;
         scanner = new Scanner(System.in);
         String userInput = scanner.nextLine();
@@ -46,7 +46,7 @@ public class Star {
         Hi();
         lineBreak();
         while (start == 0) {
-            start = readScanner();
+            start = Echo();
         }
         lineBreak();
         Bye();
