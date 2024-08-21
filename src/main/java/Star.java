@@ -1,3 +1,6 @@
+import java.util.Objects;
+import java.util.Scanner;
+
 public class Star {
 
     public Star() {
@@ -23,9 +26,28 @@ public class Star {
         System.out.println("bye bye! come by again soon :)\n");
     }
 
+    public static int readScanner() {
+        Scanner scanner;
+        scanner = new Scanner(System.in);
+        String userInput = scanner.nextLine();
+        if (!Objects.equals(userInput, "bye")) {
+            lineBreak();
+            System.out.println(userInput);
+            lineBreak();
+        } else {
+            return 1;
+        }
+        return 0;
+    }
+
     public static void main(String[] args) {
+        int start = 0;
         lineBreak();
         Hi();
+        lineBreak();
+        while (start == 0) {
+            start = readScanner();
+        }
         lineBreak();
         Bye();
         lineBreak();
