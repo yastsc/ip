@@ -3,6 +3,9 @@ import java.util.Scanner;
 
 public class Star {
 
+    private static String[] tasks = new String[100];
+    private static int len = 0;
+
     public Star() {
     }
 
@@ -40,13 +43,43 @@ public class Star {
         return 0;
     }
 
+    public static int Store(int i) {
+        Scanner scanner;
+        scanner = new Scanner(System.in);
+        String userInput = scanner.nextLine();
+        if (Objects.equals(userInput, "bye")) {
+            return 1;
+        } else if (Objects.equals(userInput, "list")) {
+            int y = 0;
+            for (int x = 0; x < len; x++) {
+                if (tasks[x] != null) {
+                    System.out.println(String.format("%d. ", x + 1) + tasks[y]);
+                    y++;
+                } else {
+                    System.out.println(String.format("%d. ", x + 1) + tasks[y + 1]);
+                    y += 2;
+                }
+            }
+            lineBreak();
+        } else {
+            lineBreak();
+            tasks[i] = userInput;
+            len++;
+            System.out.println("added: " + userInput);
+            lineBreak();
+        }
+        return 0;
+    }
+
     public static void main(String[] args) {
         int start = 0;
         lineBreak();
         Hi();
         lineBreak();
+        int count = 0;
         while (start == 0) {
-            start = Echo();
+            start = Store(count);
+            count++;
         }
         lineBreak();
         Bye();
