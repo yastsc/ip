@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Star {
 
-    private static String[] tasks = new String[100];
+    private static Task[] tasks = new Task[100];
     private static int len = 0;
 
     public Star() {
@@ -47,25 +47,35 @@ public class Star {
         Scanner scanner;
         scanner = new Scanner(System.in);
         String userInput = scanner.nextLine();
+        String[] strArray = userInput.split(" ");
         if (Objects.equals(userInput, "bye")) {
             return 1;
         } else if (Objects.equals(userInput, "list")) {
-            int y = 0;
             for (int x = 0; x < len; x++) {
                 if (tasks[x] != null) {
-                    System.out.println(String.format("%d. ", x + 1) + tasks[y]);
-                    y++;
+                    System.out.println(String.format("%d. ", x + 1) + tasks[x]);
                 } else {
-                    System.out.println(String.format("%d. ", x + 1) + tasks[y + 1]);
-                    y += 2;
+                    int y = 0;
+                    while (tasks[x + y] == null) {
+                        y++;
+                    }
+                    tasks[x] = tasks[x + y];
+                    tasks[x + y] = null;
+                    System.out.println(String.format("%d. ", x + 1) + tasks[x]);
                 }
             }
             lineBreak();
+        } else if (Objects.equals(strArray[0], "mark")) {
+            int tasknum = Integer.parseInt(strArray[1]);
+            tasks[tasknum - 1].markDone();
+        } else if (Objects.equals(strArray[0], "unmark")) {
+            int tasknum = Integer.parseInt(strArray[1]);
+            tasks[tasknum - 1].markUndone();
         } else {
             lineBreak();
-            tasks[i] = userInput;
+            tasks[i] = new Task(userInput);
             len++;
-            System.out.println("added: " + userInput);
+            System.out.println("added: " + tasks[i]);
             lineBreak();
         }
         return 0;
