@@ -65,6 +65,13 @@ public class Star {
                 }
             }
             lineBreak();
+        } else if (Objects.equals(strArray[0], "delete")) {
+            int tasknum = Integer.parseInt(strArray[1]);
+            len--;
+            System.out.println("okay! this task has been removed: \n" + tasks[tasknum - 1] + "\n" +
+                    String.format((len == 1) ? "now you have %d task left!" : "now you have %d tasks left!", len));
+            tasks[tasknum - 1] = null;
+            lineBreak();
         } else if (Objects.equals(strArray[0], "mark")) {
             int tasknum = Integer.parseInt(strArray[1]);
             tasks[tasknum - 1].markDone();

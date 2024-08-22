@@ -1,4 +1,5 @@
 public class Task {
+
     protected String description;
     protected boolean isDone;
 
@@ -29,5 +30,4 @@ public class Task {
     public String toString() {
         return "[" + getStatusIcon() + "]" + " " + getDescription();
     }
-
 }
