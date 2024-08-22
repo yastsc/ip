@@ -68,10 +68,34 @@ public class Star {
         } else if (Objects.equals(strArray[0], "mark")) {
             int tasknum = Integer.parseInt(strArray[1]);
             tasks[tasknum - 1].markDone();
+            lineBreak();
         } else if (Objects.equals(strArray[0], "unmark")) {
             int tasknum = Integer.parseInt(strArray[1]);
             tasks[tasknum - 1].markUndone();
-        } else {
+            lineBreak();
+        } else if (userInput.contains("todo")) {
+            lineBreak();
+            tasks[i] = new ToDo(userInput);
+            len++;
+            System.out.println("you have a new task: \n" + tasks[i] + "\n" +
+                    String.format((len == 1) ? "you now have %d task in the list!" : "you now have %d tasks in the list!", len));
+            lineBreak();
+        } else if (userInput.contains("event")) {
+            lineBreak();
+            tasks[i] = new Event(userInput);
+            len++;
+            System.out.println("you have a new task: \n" + tasks[i] + "\n" +
+                    String.format((len == 1) ? "you now have %d task in the list!" : "you now have %d tasks in the list!", len));
+            lineBreak();
+        } else if (userInput.contains("deadline")) {
+            lineBreak();
+            tasks[i] = new Deadline(userInput);
+            len++;
+            System.out.println("you have a new task: \n" + tasks[i] + "\n" +
+                    String.format((len == 1) ? "you now have %d task in the list!" : "you now have %d tasks in the list!", len));
+            lineBreak();
+        }
+        else {
             lineBreak();
             tasks[i] = new Task(userInput);
             len++;
