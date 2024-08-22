@@ -19,6 +19,6 @@ public class Event extends Task {
     }
 
     public String toString() {
-        return "[E]" + "[" + super.getStatusIcon() + "] " + getTask() + getDateTime();
+            return "[E]" + "[" + super.getStatusIcon() + "] " + getTask() + getDateTime();
     }
 }

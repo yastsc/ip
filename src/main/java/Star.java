@@ -43,7 +43,7 @@ public class Star {
         return 0;
     }
 
-    public static int Store(int i) {
+    public static int Store(int i) throws StarException {
         Scanner scanner;
         scanner = new Scanner(System.in);
         String userInput = scanner.nextLine();
@@ -74,33 +74,46 @@ public class Star {
             tasks[tasknum - 1].markUndone();
             lineBreak();
         } else if (userInput.contains("todo")) {
-            lineBreak();
-            tasks[i] = new ToDo(userInput);
-            len++;
-            System.out.println("you have a new task: \n" + tasks[i] + "\n" +
-                    String.format((len == 1) ? "you now have %d task in the list!" : "you now have %d tasks in the list!", len));
-            lineBreak();
+            if (Objects.equals(userInput, "todo")) {
+                throw StarException.emptyTodo();
+            } else {
+                lineBreak();
+                tasks[i] = new ToDo(userInput);
+                len++;
+                System.out.println("you have a new task: \n" + tasks[i] + "\n" +
+                        String.format((len == 1) ? "you now have %d task in the list!" : "you now have %d tasks in the list!", len));
+                lineBreak();
+            }
         } else if (userInput.contains("event")) {
-            lineBreak();
-            tasks[i] = new Event(userInput);
-            len++;
-            System.out.println("you have a new task: \n" + tasks[i] + "\n" +
-                    String.format((len == 1) ? "you now have %d task in the list!" : "you now have %d tasks in the list!", len));
-            lineBreak();
+            if (Objects.equals(userInput, "event")) {
+                throw StarException.emptyEvent();
+            } else {
+                lineBreak();
+                tasks[i] = new Event(userInput);
+                len++;
+                System.out.println("you have a new task: \n" + tasks[i] + "\n" +
+                        String.format((len == 1) ? "you now have %d task in the list!" : "you now have %d tasks in the list!", len));
+                lineBreak();
+            }
         } else if (userInput.contains("deadline")) {
-            lineBreak();
-            tasks[i] = new Deadline(userInput);
-            len++;
-            System.out.println("you have a new task: \n" + tasks[i] + "\n" +
-                    String.format((len == 1) ? "you now have %d task in the list!" : "you now have %d tasks in the list!", len));
-            lineBreak();
+            if (Objects.equals(userInput, "deadline")) {
+                throw StarException.emptyDeadline();
+            } else {
+                lineBreak();
+                tasks[i] = new Deadline(userInput);
+                len++;
+                System.out.println("you have a new task: \n" + tasks[i] + "\n" +
+                        String.format((len == 1) ? "you now have %d task in the list!" : "you now have %d tasks in the list!", len));
+                lineBreak();
+            }
         }
         else {
-            lineBreak();
-            tasks[i] = new Task(userInput);
-            len++;
-            System.out.println("added: " + tasks[i]);
-            lineBreak();
+            throw StarException.unknownCommand();
+//            lineBreak();
+//            tasks[i] = new Task(userInput);
+//            len++;
+//            System.out.println("added: " + tasks[i]);
+//            lineBreak();
         }
         return 0;
     }
@@ -112,8 +125,14 @@ public class Star {
         lineBreak();
         int count = 0;
         while (start == 0) {
-            start = Store(count);
-            count++;
+            try {
+                start = Store(count);
+                count++;
+            } catch (StarException e) {
+                lineBreak();
+                System.out.println(e.getMessage());
+                lineBreak();
+            }
         }
         lineBreak();
         Bye();
