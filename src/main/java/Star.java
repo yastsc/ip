@@ -1,6 +1,8 @@
 import java.io.*;
 import java.util.Objects;
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Star {
 
@@ -149,7 +151,7 @@ public class Star {
     }
 
     private static void loadTasks() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("./data/star.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 if (line.startsWith("T")) {
