@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -5,6 +6,7 @@ public class Star {
 
     private static Task[] tasks = new Task[100];
     private static int len = 0;
+    private static String filePath = "./data/star.txt";
 
     public Star() {
     }
@@ -72,14 +74,17 @@ public class Star {
                     String.format((len == 1) ? "now you have %d task left!" : "now you have %d tasks left!", len));
             tasks[tasknum - 1] = null;
             lineBreak();
+            saveTasks(false);
         } else if (Objects.equals(strArray[0], "mark")) {
             int tasknum = Integer.parseInt(strArray[1]);
             tasks[tasknum - 1].markDone();
             lineBreak();
+            saveTasks(false);
         } else if (Objects.equals(strArray[0], "unmark")) {
             int tasknum = Integer.parseInt(strArray[1]);
             tasks[tasknum - 1].markUndone();
             lineBreak();
+            saveTasks(false);
         } else if (userInput.contains("todo")) {
             if (Objects.equals(userInput, "todo")) {
                 throw StarException.emptyTodo();
@@ -90,6 +95,7 @@ public class Star {
                 System.out.println("you have a new task: \n" + tasks[i] + "\n" +
                         String.format((len == 1) ? "you now have %d task in the list!" : "you now have %d tasks in the list!", len));
                 lineBreak();
+                saveTasks(true);
             }
         } else if (userInput.contains("event")) {
             if (Objects.equals(userInput, "event")) {
@@ -101,6 +107,7 @@ public class Star {
                 System.out.println("you have a new task: \n" + tasks[i] + "\n" +
                         String.format((len == 1) ? "you now have %d task in the list!" : "you now have %d tasks in the list!", len));
                 lineBreak();
+                saveTasks(true);  // Append new task to file
             }
         } else if (userInput.contains("deadline")) {
             if (Objects.equals(userInput, "deadline")) {
@@ -112,25 +119,60 @@ public class Star {
                 System.out.println("you have a new task: \n" + tasks[i] + "\n" +
                         String.format((len == 1) ? "you now have %d task in the list!" : "you now have %d tasks in the list!", len));
                 lineBreak();
+                saveTasks(true);  // Append new task to file
             }
-        }
-        else {
+        } else {
             throw StarException.unknownCommand();
-//            lineBreak();
-//            tasks[i] = new Task(userInput);
-//            len++;
-//            System.out.println("added: " + tasks[i]);
-//            lineBreak();
         }
         return 0;
     }
 
+
+    private static void saveTasks(boolean append) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, append))) {
+            if (!append) {
+                for (int i = 0; i < len; i++) {
+                    if (tasks[i] != null) {
+                        writer.write(tasks[i].toString());
+                        writer.newLine();
+                    }
+                }
+            } else {
+                if (tasks[len - 1] != null) {
+                    writer.write(tasks[len - 1].toString());
+                    writer.newLine();
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static void loadTasks() {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (line.startsWith("T")) {
+                    tasks[len] = new ToDo(line);
+                } else if (line.startsWith("E")) {
+                    tasks[len] = new Event(line);
+                } else if (line.startsWith("D")) {
+                    tasks[len] = new Deadline(line);
+                }
+                len++;
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static void main(String[] args) {
-        int start = 0;
         lineBreak();
         Hi();
         lineBreak();
-        int count = 0;
+        loadTasks();
+        int start = 0;
+        int count = len;
         while (start == 0) {
             try {
                 start = Store(count);
