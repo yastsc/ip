@@ -4,13 +4,18 @@ public class ToDo extends Task {
         super(description);
     }
 
-    public String getTask() {
-        String[] startArr = super.getDescription().split(" ", 2);
-        return startArr[1];
+//    public String getTask() {
+//        String[] startArr = super.getDescription().split(" ", 2);
+//        return startArr[1];
+//    }
+
+    @Override
+    public String getOutput() {
+        return String.format("T | %d | %s", isDone ? 1 : 0, description);
     }
 
     @Override
     public String toString() {
-            return "[T]" + "[" + super.getStatusIcon() + "] " + getTask();
+            return "[T]" + super.toString();
     }
 }

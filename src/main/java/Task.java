@@ -14,16 +14,20 @@ public class Task {
 
     public void markDone() {
         this.isDone = true;
-        System.out.println("yay! this task is done: \n" + this);
+//        System.out.println("yay! this task is done: \n" + this);
     }
 
     public void markUndone() {
         this.isDone = false;
-        System.out.println("oops it seems that this task isn't done yet: \n" + this);
+//        System.out.println("oops it seems that this task isn't done yet: \n" + this);
     }
 
     public String getDescription() {
         return this.description;
+    }
+
+    public String getOutput() {
+        return String.format("X | %d | %s", isDone ? 1 : 0, description);
     }
 
     @Override
