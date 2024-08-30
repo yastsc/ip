@@ -1,2 +1,144 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.util.Objects;
+
 public class Parser {
+
+    static Command parse(String fullCommand) throws StarException {
+        if (isExit(fullCommand)) {
+            return new exitCommand();
+        }
+        if (isDone(fullCommand)) {
+            String[] newInput = fullCommand.split(" ");
+            return new doneCommand(Integer.parseInt(newInput[1]));
+        }
+        if (isUndone(fullCommand)) {
+            String[] newInput = fullCommand.split(" ");
+            return new undoneCommand(Integer.parseInt(newInput[1]));
+        }
+        if (isList(fullCommand)) {
+            return new listCommand();
+        }
+        if (isDelete(fullCommand)) {
+            String[] newInput = fullCommand.split(" ");
+            return new deleteCommand(Integer.parseInt(newInput[1]));
+        }
+        if (isTodo(fullCommand)) {
+            String[] newInput = fullCommand.split(" ");
+            return new addToDoCommand(newInput[1]);
+        }
+        if (isDeadline(fullCommand)) {
+            String[] newInput = validateDeadline(fullCommand);
+            if (isDate(newInput[1])) {
+                LocalDate date = parseDate(newInput[1]);
+                return new addDeadlineCommand(newInput[0], date);
+            }
+            return new addDeadlineCommand(newInput[0], newInput[1]);
+        }
+        if (isEvent(fullCommand)) {
+            String[] newInput = validateEvent(fullCommand);
+            if (isDate(newInput[1]) && isDate(newInput[2])) {
+                LocalDate date1 = parseDate(newInput[1]);
+                LocalDate date2 = parseDate(newInput[2]);
+                return new addEventCommand(newInput[0], date1, date2);
+            }
+            return new addEventCommand(newInput[0], newInput[1]);
+        }
+        else {
+            throw StarException.unknownCommand();
+        }
+    }
+
+    private static boolean isUndone(String input) {
+        return input.startsWith("unmark");
+    }
+
+    private static boolean isDone(String input) {
+        return input.startsWith("mark");
+    }
+
+    private static boolean isDelete(String input) {
+        return input.startsWith("delete");
+    }
+
+    private static boolean isTodo(String input) {
+        return input.startsWith("todo");
+    }
+
+    private static boolean isEvent(String input) {
+        return input.startsWith("event");
+    }
+
+    private static boolean isDeadline(String input) {
+        return input.startsWith("deadline");
+    }
+
+    private static boolean isExit(String input) {
+        return Objects.equals(input, "bye");
+    }
+
+    private static boolean isList(String input) {
+        return Objects.equals(input, "list");
+    }
+
+    public static boolean isDate(String input) {
+        String[] splitInput = input.split("/");
+        if (splitInput.length != 3 || isNotNumber(splitInput[0]) || isNotNumber(splitInput[1])
+                || isNotNumber(splitInput[2])) {
+            return false;
+        }
+        return true;
+    }
+
+    public static LocalDate parseDate(String input) {
+        DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+                .parseCaseInsensitive().appendPattern("dd/MM/yyyy HHmm").toFormatter();
+        return LocalDate.parse(input, formatter);
+
+    }
+
+    private static boolean isNotNumber(String input) {
+        return !input.matches("[-+]?\\d*\\.?\\d+");
+    }
+
+    private static void validateTodo(String input) throws StarException {
+        if (input.isEmpty()) {
+            throw StarException.emptyTodo();
+        }
+    }
+
+    private static String[] validateEventDeadline(String input, String replaceText, String splitText, String type) throws StarException {
+        String[] splitInput = input.replaceFirst(replaceText, "").trim().split(splitText);
+
+        for (int i = 0; i < splitInput.length; i++) {
+            splitInput[i] = splitInput[i].trim();
+        }
+
+        if (splitInput.length < 2 || splitInput[0].isBlank() || splitInput[1].isBlank()) {
+            if (type.equals("E")) {
+                throw StarException.emptyEvent();
+            } else {
+                throw StarException.emptyDeadline();
+            }
+        }
+        return splitInput;
+    }
+
+    private static String[] validateEvent(String input) throws StarException {
+        String[] strArr = validateEventDeadline(input, "event", "/", "E");
+        strArr[1] = strArr[0].replace("from ", "");
+        strArr[2] = strArr[1].replace("to ", "");
+        return strArr;
+    }
+
+    private static String[] validateDeadline(String input) throws StarException {
+        return validateEventDeadline(input, "deadline", "/by", "D");
+    }
+
+
+
+
 }

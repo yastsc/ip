@@ -7,16 +7,18 @@ import java.util.Objects;
 
 public class Event extends Task {
     private String by;
-    private LocalDate date;
+    private LocalDate date1;
+    private LocalDate date2;
 
     public Event(String description, String by) {
         super(description);
         this.by = by;
     }
 
-    public Event(String description, LocalDate date) {
+    public Event(String description, LocalDate date1, LocalDate date2) {
         super(description);
-        this.date = date;
+        this.date1 = date1;
+        this.date2 = date2;
     }
 
 //    public String getDateTime() {
@@ -45,8 +47,9 @@ public class Event extends Task {
     @Override
     public String getOutput() {
         if (by == null) {
-            SimpleDateFormat formatter = new SimpleDateFormat("MMM d yyyy");
-            return String.format("E | %d | %s | %s", isDone ? 1 : 0, description, formatter.format(date));
+            SimpleDateFormat formatter = new SimpleDateFormat("MMM d yyyy HH:mm");
+            return String.format("E | %d | %s | from %s to %s", isDone ? 1 : 0, description, formatter.format(date1),
+                    formatter.format(date2));
         }
         return String.format("E | %d | %s | %s", isDone ? 1 : 0, description, by);
     }
@@ -54,9 +57,10 @@ public class Event extends Task {
     @Override
     public String toString() {
         if (by == null) {
-            SimpleDateFormat formatter = new SimpleDateFormat("MMM d yyyy");
-            return String.format("[E] %s (by: %s)", super.toString(), formatter.format(date));
+            SimpleDateFormat formatter = new SimpleDateFormat("MMM d yyyy HH:mm");
+            return String.format("[E] %s (from: %s to: %s)", super.toString(), formatter.format(date1),
+                    formatter.format(date2));
         }
-        return String.format("[E] %s (by: %s)", super.toString(), by);
+        return String.format("[E] %s (from: %s to: %s)", super.toString(), by.split("/")[0], by.split("/")[1]);
     }
 }

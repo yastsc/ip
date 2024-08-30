@@ -52,7 +52,7 @@ public class Deadline extends Task {
     @Override
     public String getOutput() {
         if (by == null) {
-            SimpleDateFormat formatter = new SimpleDateFormat("MMM d yyyy");
+            SimpleDateFormat formatter = new SimpleDateFormat("MMM d yyyy HH:mm");
             return String.format("D | %d | %s | %s", isDone ? 1 : 0, description, formatter.format(date));
         }
         return String.format("D | %d | %s | %s", isDone ? 1 : 0, description, by);
@@ -61,7 +61,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         if (by == null) {
-            SimpleDateFormat formatter = new SimpleDateFormat("MMM d yyyy");
+            SimpleDateFormat formatter = new SimpleDateFormat("MMM d yyyy HH:mm");
             return String.format("[D] %s (by: %s)", super.toString(), formatter.format(date));
         }
         return String.format("[D] %s (by: %s)", super.toString(), by);
