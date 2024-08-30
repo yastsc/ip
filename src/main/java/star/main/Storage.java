@@ -60,14 +60,14 @@ public class Storage {
         return tasks;
     }
 
-    public void save(ArrayList<Task> tasklist) throws StarException {
+    public void save(ArrayList<Task> taskList) throws StarException {
 
         File fileDir = new File("./data");
         if (!fileDir.exists()) {
             fileDir.mkdirs();
         }
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-                for (Task task : tasklist) {
+                for (Task task : taskList) {
                     writer.write(task.getOutput() + System.lineSeparator());
                 }
             } catch (IOException e) {
