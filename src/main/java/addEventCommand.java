@@ -16,7 +16,17 @@ public class addEventCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws StarException {
+        Event event;
+        if (date == null) {
+            event = new Event(description, by);
+        } else {
+            event = new Event(description, date);
+        }
+
+        tasks.addTask(event);
+        ui.addSuccessMsg(event, tasks.length());
+        storage.save(tasks.getTasks());
 
     }
 }

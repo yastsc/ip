@@ -47,6 +47,14 @@ public class Ui {
 
     }
 
+    public void doneMsg(Task task) {
+        out.println("yay! this task is done: \n" + task);
+    }
+
+    public void undoneMsg(Task task) {
+        out.println("oops it seems that this task isn't done yet: \n" + task);
+    }
+
     public void printList(ArrayList<Task> tasks, String message) {
         out.println(message + "\n");
         for (int i = 0; i < tasks.size(); i++) {
