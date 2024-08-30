@@ -79,4 +79,14 @@ public class TaskList {
     public void markUndone(int zeroIndex) {
         tasks.get(zeroIndex).markUndone();
     }
+
+    public ArrayList<Task> findTasks(String keyword) {
+        ArrayList<Task> tasksFind = new ArrayList<>();
+        for (Task task : this.tasks) {
+            if (task.toString().contains(keyword)) {
+                tasksFind.add(task);
+            }
+        }
+        return tasksFind;
+    }
 }

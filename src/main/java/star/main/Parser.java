@@ -21,6 +21,10 @@ public class Parser {
             String[] newInput = fullCommand.split(" ");
             return new undoneCommand(Integer.parseInt(newInput[1]));
         }
+        if (isFind(fullCommand)) {
+            String[] newInput = fullCommand.split(" ");
+            return new findCommand(newInput[1]);
+        }
         if (isList(fullCommand)) {
             return new listCommand();
         }
@@ -64,6 +68,10 @@ public class Parser {
 
     private static boolean isDelete(String input) {
         return input.startsWith("delete");
+    }
+
+    private static boolean isFind(String input) {
+        return input.startsWith("find");
     }
 
     private static boolean isTodo(String input) {
