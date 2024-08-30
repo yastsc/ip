@@ -1,8 +1,10 @@
 plugins {
     id 'java'
     id 'application'
+    id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
+
 
 repositories {
     mavenCentral()
@@ -28,14 +30,14 @@ test {
 }
 
 application {
-    mainClass.set("seedu.duke.Duke")
+    mainClass.set("Star")
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "star"
     archiveClassifier = null
 }
 
-run{
+run {
     standardInput = System.in
 }
