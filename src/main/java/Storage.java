@@ -53,20 +53,17 @@ public class Storage {
     }
 
     public void save(ArrayList<Task> tasklist) throws StarException {
-        try {
-            File fileDir = new File("./data");
-            if (!fileDir.exists()) {
-                fileDir.mkdirs();
-            }
 
-            BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
-            for (Task task : tasklist) {
-                writer.append(task.getOutput());
-                writer.append("\n");
-            }
-
-        } catch (IOException e) {
-            throw new StarException("uh oh! an IO exception occurred :(");
+        File fileDir = new File("./data");
+        if (!fileDir.exists()) {
+            fileDir.mkdirs();
         }
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+                for (Task task : tasklist) {
+                    writer.write(task.getOutput() + System.lineSeparator());
+                }
+            } catch (IOException e) {
+                System.out.println("something went wrong while saving :0 " + e.getMessage());
+            }
     }
 }

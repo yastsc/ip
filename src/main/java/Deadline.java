@@ -1,5 +1,5 @@
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
@@ -8,13 +8,13 @@ import java.util.Objects;
 
 public class Deadline extends Task {
     private String by;
-    private LocalDate date;
+    private LocalDateTime date;
 
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
     }
-    public Deadline(String description, LocalDate date) {
+    public Deadline(String description, LocalDateTime date) {
         super(description);
         this.date = date;
     }
@@ -52,8 +52,8 @@ public class Deadline extends Task {
     @Override
     public String getOutput() {
         if (by == null) {
-            SimpleDateFormat formatter = new SimpleDateFormat("MMM d yyyy HH:mm");
-            return String.format("D | %d | %s | %s", isDone ? 1 : 0, description, formatter.format(date));
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
+            return String.format("D | %d | %s | %s", isDone ? 1 : 0, description, date.format(formatter));
         }
         return String.format("D | %d | %s | %s", isDone ? 1 : 0, description, by);
     }
@@ -61,8 +61,8 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         if (by == null) {
-            SimpleDateFormat formatter = new SimpleDateFormat("MMM d yyyy HH:mm");
-            return String.format("[D] %s (by: %s)", super.toString(), formatter.format(date));
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
+            return String.format("[D] %s (by: %s)", super.toString(), date.format(formatter));
         }
         return String.format("[D] %s (by: %s)", super.toString(), by);
     }

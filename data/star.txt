@@ -1,5 +1,2 @@
-[T][ ] play
-[E][ ] event (from: 26to: )
-[E][ ] event (from: Jul 26 2014to: )
-[E][ ] event (from: Jul 26 2014 to: )
-[E][ ] event (from: Jul 26 2014)
+T | 0 | run
+T | 0 | read

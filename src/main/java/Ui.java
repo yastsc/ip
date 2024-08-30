@@ -56,10 +56,10 @@ public class Ui {
     }
 
     public void printList(ArrayList<Task> tasks, String message) {
-        out.println(message + "\n");
+        out.println(message);
         for (int i = 0; i < tasks.size(); i++) {
             int oneIndex = i + 1;
-            String output = String.format("%d. %s\n", oneIndex, tasks.get(i));
+            String output = String.format("%d. %s", oneIndex, tasks.get(i));
             out.println(output);
         }
     }

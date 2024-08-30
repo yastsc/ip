@@ -1,6 +1,7 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.Objects;
@@ -33,7 +34,7 @@ public class Parser {
         if (isDeadline(fullCommand)) {
             String[] newInput = validateDeadline(fullCommand);
             if (isDate(newInput[1])) {
-                LocalDate date = parseDate(newInput[1]);
+                LocalDateTime date = parseDate(newInput[1]);
                 return new addDeadlineCommand(newInput[0], date);
             }
             return new addDeadlineCommand(newInput[0], newInput[1]);
@@ -41,8 +42,8 @@ public class Parser {
         if (isEvent(fullCommand)) {
             String[] newInput = validateEvent(fullCommand);
             if (isDate(newInput[1]) && isDate(newInput[2])) {
-                LocalDate date1 = parseDate(newInput[1]);
-                LocalDate date2 = parseDate(newInput[2]);
+                LocalDateTime date1 = parseDate(newInput[1]);
+                LocalDateTime date2 = parseDate(newInput[2]);
                 return new addEventCommand(newInput[0], date1, date2);
             }
             return new addEventCommand(newInput[0], newInput[1]);
@@ -85,18 +86,16 @@ public class Parser {
     }
 
     public static boolean isDate(String input) {
-        String[] splitInput = input.split("/");
-        if (splitInput.length != 3 || isNotNumber(splitInput[0]) || isNotNumber(splitInput[1])
-                || isNotNumber(splitInput[2])) {
+        String[] splitInput = input.split("-");
+        if (splitInput.length != 3 || isNotNumber(splitInput[0]) || isNotNumber(splitInput[1])) {
             return false;
         }
         return true;
     }
 
-    public static LocalDate parseDate(String input) {
-        DateTimeFormatter formatter = new DateTimeFormatterBuilder()
-                .parseCaseInsensitive().appendPattern("dd/MM/yyyy HHmm").toFormatter();
-        return LocalDate.parse(input, formatter);
+    public static LocalDateTime parseDate(String input) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+        return LocalDateTime.parse(input, formatter);
 
     }
 
@@ -129,8 +128,8 @@ public class Parser {
 
     private static String[] validateEvent(String input) throws StarException {
         String[] strArr = validateEventDeadline(input, "event", "/", "E");
-        strArr[1] = strArr[0].replace("from ", "");
-        strArr[2] = strArr[1].replace("to ", "");
+        strArr[1] = strArr[1].replace("from ", ""); // 12/05/2020 0300 /to 31/05/2020 0600
+        strArr[2] = strArr[2].replace("to ", "");
         return strArr;
     }
 

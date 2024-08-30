@@ -1,5 +1,6 @@
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
@@ -7,15 +8,15 @@ import java.util.Objects;
 
 public class Event extends Task {
     private String by;
-    private LocalDate date1;
-    private LocalDate date2;
+    private LocalDateTime date1;
+    private LocalDateTime date2;
 
     public Event(String description, String by) {
         super(description);
         this.by = by;
     }
 
-    public Event(String description, LocalDate date1, LocalDate date2) {
+    public Event(String description, LocalDateTime date1, LocalDateTime date2) {
         super(description);
         this.date1 = date1;
         this.date2 = date2;
@@ -47,9 +48,9 @@ public class Event extends Task {
     @Override
     public String getOutput() {
         if (by == null) {
-            SimpleDateFormat formatter = new SimpleDateFormat("MMM d yyyy HH:mm");
-            return String.format("E | %d | %s | from %s to %s", isDone ? 1 : 0, description, formatter.format(date1),
-                    formatter.format(date2));
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
+            return String.format("E | %d | %s | from %s to %s", isDone ? 1 : 0, description, date1.format(formatter),
+                    date2.format(formatter));
         }
         return String.format("E | %d | %s | %s", isDone ? 1 : 0, description, by);
     }
@@ -57,9 +58,9 @@ public class Event extends Task {
     @Override
     public String toString() {
         if (by == null) {
-            SimpleDateFormat formatter = new SimpleDateFormat("MMM d yyyy HH:mm");
-            return String.format("[E] %s (from: %s to: %s)", super.toString(), formatter.format(date1),
-                    formatter.format(date2));
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy H/h:mm");
+            return String.format("[E] %s (from: %s to: %s)", super.toString(), date1.format(formatter),
+                    date2.format(formatter));
         }
         return String.format("[E] %s (from: %s to: %s)", super.toString(), by.split("/")[0], by.split("/")[1]);
     }
