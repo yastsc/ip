@@ -1,3 +1,11 @@
+package star.command;
+
+import star.exception.StarException;
+import star.main.Storage;
+import star.main.TaskList;
+import star.main.Ui;
+import star.task.Task;
+
 public class deleteCommand extends Command {
     private int zeroIndex;
 

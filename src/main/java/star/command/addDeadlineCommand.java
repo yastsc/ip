@@ -1,4 +1,11 @@
-import java.time.LocalDate;
+package star.command;
+
+import star.exception.StarException;
+import star.main.Storage;
+import star.main.TaskList;
+import star.main.Ui;
+import star.task.Deadline;
+
 import java.time.LocalDateTime;
 
 public class addDeadlineCommand extends Command {

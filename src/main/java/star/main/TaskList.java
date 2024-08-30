@@ -1,3 +1,7 @@
+package star.main;
+
+import star.task.Task;
+
 import java.util.ArrayList;
 
 public class TaskList {

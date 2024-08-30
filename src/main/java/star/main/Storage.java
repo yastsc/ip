@@ -1,3 +1,11 @@
+package star.main;
+
+import star.exception.StarException;
+import star.task.Deadline;
+import star.task.Event;
+import star.task.Task;
+import star.task.ToDo;
+
 import java.io.*;
 import java.util.ArrayList;
 

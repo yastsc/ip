@@ -1,10 +1,7 @@
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+package star.task;
+
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.util.Objects;
 
 public class Event extends Task {
     private String by;

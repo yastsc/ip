@@ -1,3 +1,10 @@
+package star.command;
+
+import star.exception.StarException;
+import star.main.Storage;
+import star.main.TaskList;
+import star.main.Ui;
+
 public class doneCommand extends Command {
     private int zeroIndex;
 

@@ -1,10 +1,10 @@
-import java.io.*;
-import java.util.Objects;
-import java.util.Scanner;
-import java.time.LocalDate;
-import java.time.LocalTime;
+package star.main;
 
-    public class Star {
+import star.command.*;
+import star.exception.StarException;
+
+
+public class Star {
 
         private Storage storage;
         private TaskList tasks;
@@ -47,13 +47,13 @@ import java.time.LocalTime;
 
 
 
-//public class Star {
+//public class star.main.Star {
 //
-//    private static Task[] tasks = new Task[100];
+//    private static star.task.Task[] tasks = new star.task.Task[100];
 //    private static int len = 0;
 //    private static String filePath = "./data/star.txt";
 //
-//    public Star() {
+//    public star.main.Star() {
 //    }
 //
 //    public static void Hi() {
@@ -90,7 +90,7 @@ import java.time.LocalTime;
 //        return 0;
 //    }
 //
-//    public static int Store(int i) throws StarException {
+//    public static int Store(int i) throws star.exception.StarException {
 //        Scanner scanner;
 //        scanner = new Scanner(System.in);
 //        String userInput = scanner.nextLine();
@@ -132,10 +132,10 @@ import java.time.LocalTime;
 //            saveTasks(false);
 //        } else if (userInput.contains("todo")) {
 //            if (Objects.equals(userInput, "todo")) {
-//                throw StarException.emptyTodo();
+//                throw star.exception.StarException.emptyTodo();
 //            } else {
 //                lineBreak();
-//                tasks[i] = new ToDo(userInput);
+//                tasks[i] = new star.task.ToDo(userInput);
 //                len++;
 //                System.out.println("you have a new task: \n" + tasks[i] + "\n" +
 //                        String.format((len == 1) ? "you now have %d task in the list!" : "you now have %d tasks in the list!", len));
@@ -144,10 +144,10 @@ import java.time.LocalTime;
 //            }
 //        } else if (userInput.contains("event")) {
 //            if (Objects.equals(userInput, "event")) {
-//                throw StarException.emptyEvent();
+//                throw star.exception.StarException.emptyEvent();
 //            } else {
 //                lineBreak();
-//                tasks[i] = new Event(userInput);
+//                tasks[i] = new star.task.Event(userInput);
 //                len++;
 //                System.out.println("you have a new task: \n" + tasks[i] + "\n" +
 //                        String.format((len == 1) ? "you now have %d task in the list!" : "you now have %d tasks in the list!", len));
@@ -156,10 +156,10 @@ import java.time.LocalTime;
 //            }
 //        } else if (userInput.contains("deadline")) {
 //            if (Objects.equals(userInput, "deadline")) {
-//                throw StarException.emptyDeadline();
+//                throw star.exception.StarException.emptyDeadline();
 //            } else {
 //                lineBreak();
-//                tasks[i] = new Deadline(userInput);
+//                tasks[i] = new star.task.Deadline(userInput);
 //                len++;
 //                System.out.println("you have a new task: \n" + tasks[i] + "\n" +
 //                        String.format((len == 1) ? "you now have %d task in the list!" : "you now have %d tasks in the list!", len));
@@ -167,7 +167,7 @@ import java.time.LocalTime;
 //                saveTasks(true);  // Append new task to file
 //            }
 //        } else {
-//            throw StarException.unknownCommand();
+//            throw star.exception.StarException.unknownCommand();
 //        }
 //        return 0;
 //    }
@@ -198,11 +198,11 @@ import java.time.LocalTime;
 //            String line;
 //            while ((line = reader.readLine()) != null) {
 //                if (line.startsWith("T")) {
-//                    tasks[len] = new ToDo(line);
+//                    tasks[len] = new star.task.ToDo(line);
 //                } else if (line.startsWith("E")) {
-//                    tasks[len] = new Event(line);
+//                    tasks[len] = new star.task.Event(line);
 //                } else if (line.startsWith("D")) {
-//                    tasks[len] = new Deadline(line);
+//                    tasks[len] = new star.task.Deadline(line);
 //                }
 //                len++;
 //            }
@@ -224,7 +224,7 @@ import java.time.LocalTime;
 //            try {
 //                start = Store(count);
 //                count++;
-//            } catch (StarException e) {
+//            } catch (star.exception.StarException e) {
 //                lineBreak();
 //                System.out.println(e.getMessage());
 //                lineBreak();

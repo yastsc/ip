@@ -1,3 +1,5 @@
+package star.exception;
+
 public class StarException extends Exception {
     public StarException(String message) {
         super(message);

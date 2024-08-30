@@ -1,3 +1,5 @@
+package star.task;
+
 public class Task {
 
     protected String description;
