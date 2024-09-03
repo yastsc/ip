@@ -5,3 +5,6 @@ T | 0 | run
 T | 0 | fall
 T | 0 | hide
 T | 0 | run
+T | 0 | run
+T | 0 | spea
+T | 0 | run
