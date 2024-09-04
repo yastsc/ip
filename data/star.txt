@@ -1,6 +1,6 @@
-T | 0 | run
+T | 1 | run
 T | 0 | read
-T | 0 | whee
+T | 1 | whee
 T | 0 | run
 T | 0 | fall
 T | 0 | hide
@@ -8,3 +8,7 @@ T | 0 | run
 T | 0 | run
 T | 0 | spea
 T | 0 | run
+T | 0 | run
+T | 0 | sleep
+T | 0 | run
+D | 0 | task | 13/09/2024

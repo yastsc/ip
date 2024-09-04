@@ -4,6 +4,10 @@ import star.main.Storage;
 import star.main.TaskList;
 import star.main.Ui;
 
+/**
+ * Represents the Command to exit the application.
+ * Inherits from the Command class.
+ */
 public class exitCommand extends Command {
 
     @Override

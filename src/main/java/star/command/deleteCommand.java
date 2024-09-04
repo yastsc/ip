@@ -6,9 +6,17 @@ import star.main.TaskList;
 import star.main.Ui;
 import star.task.Task;
 
+/**
+ * Represents a Command to delete a task from the task list.
+ * Inherits from the Command class.
+ */
 public class deleteCommand extends Command {
     private int zeroIndex;
 
+    /**
+     * Constructs a deleteCommand using the task's index to be deleted using its index from the printed task list.
+     * @param oneIndex index of a task when it is printed as a list, which is index in array + 1.
+     */
     public deleteCommand(int oneIndex) {
         this.zeroIndex = oneIndex - 1;
     }

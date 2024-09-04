@@ -1,10 +1,18 @@
 package star.task;
 
+/**
+ * Represents a general Task.
+ * Contains functions like displaying status, and getting output format.
+ */
 public class Task {
 
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Constructs a general Task with the given description.
+     * @param description which is a String that gives a description of the task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;

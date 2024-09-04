@@ -4,13 +4,23 @@ import star.task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * Represents the list of tasks and has operations to manipulate the task list.
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
 
+    /**
+     * Constructs a new task list.
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Constructs the TaskList using an existing task list.
+     * @param tasks
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }

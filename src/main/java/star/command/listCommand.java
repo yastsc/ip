@@ -4,6 +4,10 @@ import star.main.Storage;
 import star.main.TaskList;
 import star.main.Ui;
 
+/**
+ * Represents a Command to print the current task list.
+ * Inherits from the Command class.
+ */
 public class listCommand extends Command {
 
     @Override
