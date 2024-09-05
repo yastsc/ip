@@ -15,3 +15,6 @@ T | 0 | run
 E | 0 | run | 13
 E | 0 | run | 13
 E | 0 | run | 13
+E | 0 | walk | at 13
+D | 0 | tutkv | 20/09/2024
+T | 0 | run

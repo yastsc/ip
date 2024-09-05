@@ -53,7 +53,7 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
 
         // Create a pause (delay)
-        PauseTransition delay = new PauseTransition(Duration.seconds(1)); // 1-second delay
+        PauseTransition delay = new PauseTransition(Duration.seconds(0.5)); // 1-second delay
         delay.setOnFinished(event -> {
             // Add Duke's response after the delay
             dialogContainer.getChildren().add(

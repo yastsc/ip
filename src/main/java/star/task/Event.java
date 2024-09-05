@@ -5,18 +5,16 @@ import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
     private String by;
-    private LocalDateTime date1;
-    private LocalDateTime date2;
+    private LocalDateTime[] dates;
 
     public Event(String description, String by) {
         super(description);
         this.by = by;
     }
 
-    public Event(String description, LocalDateTime date1, LocalDateTime date2) {
+    public Event(String description, LocalDateTime... dates) {
         super(description);
-        this.date1 = date1;
-        this.date2 = date2;
+        this.dates = dates;
     }
 
 //    public String getDateTime() {
@@ -46,8 +44,15 @@ public class Event extends Task {
     public String getOutput() {
         if (by == null) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
-            return String.format("E | %d | %s | from %s to %s", isDone ? 1 : 0, description, date1.format(formatter),
-                    date2.format(formatter));
+            if (dates.length == 2) {
+                return String.format("E | %d | %s | from %s to %s", isDone ? 1 : 0,
+                        description, dates[0].format(formatter), dates[1].format(formatter));
+            } else if (dates.length == 1) {
+                return String.format("E | %d | %s | at %s", isDone ? 1 : 0,
+                        description, dates[0].format(formatter));
+            } else {
+                return String.format("E | %d | %s | no dates provided", isDone ? 1 : 0, description);
+            }
         }
         return String.format("E | %d | %s | %s", isDone ? 1 : 0, description, by);
     }
@@ -56,9 +61,15 @@ public class Event extends Task {
     public String toString() {
         if (by == null) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy H/h:mm");
-            return String.format("[E] %s (from: %s to: %s)", super.toString(), date1.format(formatter),
-                    date2.format(formatter));
+            if (dates.length == 2) {
+                return String.format("[E] %s (from: %s to: %s)", super.toString(),
+                        dates[0].format(formatter), dates[1].format(formatter));
+            } else if (dates.length == 1) {
+                return String.format("[E] %s (at: %s)", super.toString(), dates[0].format(formatter));
+            } else {
+                return String.format("[E] %s (no dates provided)", super.toString());
+            }
         }
-        return String.format("[E] %s (from: %s to: %s)", super.toString(), "wrong date format", "wrong date format");
+        return String.format("[E] %s (by: %s)", super.toString(), by);
     }
 }
