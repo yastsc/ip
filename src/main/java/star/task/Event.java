@@ -59,6 +59,6 @@ public class Event extends Task {
             return String.format("[E] %s (from: %s to: %s)", super.toString(), date1.format(formatter),
                     date2.format(formatter));
         }
-        return String.format("[E] %s (from: %s to: %s)", super.toString(), by.split("/")[0], by.split("/")[1]);
+        return String.format("[E] %s (from: %s to: %s)", super.toString(), "wrong date format", "wrong date format");
     }
 }

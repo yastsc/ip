@@ -38,7 +38,7 @@ public class addDeadlineCommand extends Command {
     }
 
     @Override
-    public StringBuilder execute(TaskList tasks, Ui ui, Storage storage) throws StarException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws StarException {
         Deadline deadline;
         if (date == null) {
             deadline = new Deadline(description, by);

@@ -41,7 +41,7 @@ public class addEventCommand extends Command {
     }
 
     @Override
-    public StringBuilder execute(TaskList tasks, Ui ui, Storage storage) throws StarException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws StarException {
         Event event;
         if (date1 == null || date2 == null) {
             event = new Event(description, by);

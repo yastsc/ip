@@ -52,20 +52,30 @@ public class Ui {
         return "oops it seems that this task isn't done yet: \n" + task;
     }
 
-    public StringBuilder printList(ArrayList<Task> tasks, String message) {
-        StringBuilder output = new StringBuilder(message);
-        for (int i = 0; i < tasks.size(); i++) {
-            int oneIndex = i + 1;
-            output.append(String.format("%d. %s", oneIndex, tasks.get(i))+ "\n");
+    public String printList(ArrayList<Task> tasks, String message) {
+
+        StringBuilder s = new StringBuilder(message);
+        for (int n = 1; n <= tasks.size(); n++) {
+            s.append("\n").append(n).append(". ").append(tasks.get(n - 1));
         }
-        return output;
+        return s.toString();
+
+
+//        StringBuilder output = new StringBuilder(message);
+//        System.out.println(tasks.get(19));
+//        for (int i = 0; i < tasks.size(); i++) {
+////            int oneIndex = i + 1;
+//            output.append(String.format("%d. %s", i + 1, tasks.get(i)));
+//        }
+//        System.out.println("help");
+//        return output.toString();
     }
 
-    public String showLoadingError() {
-        return "oh no! something's not loading right :(";
+    public void showLoadingError() {
+        System.out.println("oh no! something's not loading right :(");
     }
 
-    public String showError(String e) {
-        return e;
+    public void showError(String e) {
+        System.out.println(e);
     }
 }

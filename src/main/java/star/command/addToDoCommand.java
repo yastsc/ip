@@ -22,7 +22,7 @@ public class addToDoCommand extends Command {
     }
 
     @Override
-    public StringBuilder execute(TaskList tasks, Ui ui, Storage storage) throws StarException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws StarException {
         ToDo todo = new ToDo(description);
         tasks.addTask(todo);
         storage.save(tasks.getTasks());

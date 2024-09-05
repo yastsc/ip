@@ -20,7 +20,7 @@ public class findCommand extends Command {
     }
 
     @Override
-    public StringBuilder execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         return ui.printList(tasks.findTasks(this.keyword), "these tasks match what you were looking for!");
     }
 }

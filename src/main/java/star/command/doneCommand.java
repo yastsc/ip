@@ -21,7 +21,7 @@ public class doneCommand extends Command {
     }
 
     @Override
-    public StringBuilder execute(TaskList tasks, Ui ui, Storage storage) throws StarException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws StarException {
         tasks.markDone(zeroIndex);
         storage.save(tasks.getTasks());
         return ui.doneMsg(tasks.getTask(zeroIndex));

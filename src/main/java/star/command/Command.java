@@ -18,7 +18,7 @@ public class Command {
      * @param storage which is the storage used to load and save tasks.
      * @throws StarException which is an Exception specific to Star that is thrown when there is an error.
      */
-    public StringBuilder execute(TaskList tasks, Ui ui, Storage storage) throws StarException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws StarException {
         return "";
     }
 

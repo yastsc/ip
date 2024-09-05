@@ -21,10 +21,9 @@ public class undoneCommand extends Command {
     }
 
     @Override
-    public StringBuilder execute(TaskList tasks, Ui ui, Storage storage) throws StarException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws StarException {
         tasks.markUndone(zeroIndex);
-        ui.undoneMsg(tasks.getTask(zeroIndex));
         storage.save(tasks.getTasks());
-        return null;
+        return ui.undoneMsg(tasks.getTask(zeroIndex));
     }
 }

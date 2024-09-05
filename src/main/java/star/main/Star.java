@@ -6,44 +6,63 @@ import star.exception.StarException;
 
 public class Star {
 
-        private Storage storage;
-        private TaskList tasks;
-        private Ui ui;
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
-        public Star(String filePath) {
-            ui = new Ui();
-            storage = new Storage(filePath);
-            try {
-                tasks = new TaskList(storage.load());
-            } catch (StarException e) {
-                ui.showLoadingError();
-                tasks = new TaskList();
-            }
-        }
-
-        public void run() {
-            ui.showHi();
-            ui.lineBreak();
-            boolean isExit = false;
-            while (!isExit) {
-                try {
-                    String fullCommand = ui.readCommand();
-                    ui.lineBreak(); // show the divider line ("_______")
-                    Command c = Parser.parse(fullCommand);
-                    c.execute(tasks, ui, storage);
-                    isExit = c.isExit();
-                } catch (StarException e) {
-                    ui.showError(e.getMessage());
-                } finally {
-                    ui.lineBreak();
-                }
-            }
-        }
-
-        public static void main(String[] args) {
-            new Star("data/star.txt").run();
+    public Star(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (StarException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
         }
     }
+
+    public String getResponse(String input) {
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+//                System.out.println(ui.lineBreak()); // show the divider line ("_______")
+                Command c = Parser.parse(input);
+                System.out.println("hello");
+                String output = c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+                return output;
+            } catch (StarException e) {
+                return e.getMessage();
+            } finally {
+//                ui.lineBreak();
+            }
+        }
+        return "";
+    }
+}
+
+//        public void run() {
+//            ui.showHi();
+//            ui.lineBreak();
+//            boolean isExit = false;
+//            while (!isExit) {
+//                try {
+//                    String fullCommand = ui.readCommand();
+//                    ui.lineBreak(); // show the divider line ("_______")
+//                    Command c = Parser.parse(fullCommand);
+//                    c.execute(tasks, ui, storage);
+//                    isExit = c.isExit();
+//                } catch (StarException e) {
+//                    ui.showError(e.getMessage());
+//                } finally {
+//                    ui.lineBreak();
+//                }
+//            }
+//        }
+
+//        public static void main(String[] args) {
+//            new Star("data/star.txt").run();
+//        }
 
 
 
