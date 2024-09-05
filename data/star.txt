@@ -1,5 +1,5 @@
 T | 1 | read
-T | 1 | whee
+T | 0 | whee
 T | 0 | run
 T | 0 | fall
 T | 0 | hide

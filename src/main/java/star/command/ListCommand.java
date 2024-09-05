@@ -8,7 +8,7 @@ import star.main.Ui;
  * Represents a Command to print the current task list.
  * Inherits from the Command class.
  */
-public class listCommand extends Command {
+public class ListCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {

@@ -11,47 +11,47 @@ public class Parser {
 
     static Command parse(String fullCommand) throws StarException {
         if (isExit(fullCommand)) {
-            return new exitCommand();
+            return new ExitCommand();
         }
         if (isDone(fullCommand)) {
             String[] newInput = fullCommand.split(" ");
-            return new doneCommand(Integer.parseInt(newInput[1]));
+            return new DoneCommand(Integer.parseInt(newInput[1]));
         }
         if (isUndone(fullCommand)) {
             String[] newInput = fullCommand.split(" ");
-            return new undoneCommand(Integer.parseInt(newInput[1]));
+            return new UndoneCommand(Integer.parseInt(newInput[1]));
         }
         if (isFind(fullCommand)) {
             String[] newInput = fullCommand.split(" ");
-            return new findCommand(newInput[1]);
+            return new FindCommand(newInput[1]);
         }
         if (isList(fullCommand)) {
-            return new listCommand();
+            return new ListCommand();
         }
         if (isDelete(fullCommand)) {
             String[] newInput = fullCommand.split(" ");
-            return new deleteCommand(Integer.parseInt(newInput[1]));
+            return new DeleteCommand(Integer.parseInt(newInput[1]));
         }
         if (isTodo(fullCommand)) {
             String[] newInput = fullCommand.split(" ");
-            return new addToDoCommand(newInput[1]);
+            return new AddToDoCommand(newInput[1]);
         }
         if (isDeadline(fullCommand)) {
             String[] newInput = validateDeadline(fullCommand);
             if (isDate(newInput[1])) {
                 LocalDateTime date = parseDate(newInput[1]);
-                return new addDeadlineCommand(newInput[0], date);
+                return new AddDeadlineCommand(newInput[0], date);
             }
-            return new addDeadlineCommand(newInput[0], newInput[1]);
+            return new AddDeadlineCommand(newInput[0], newInput[1]);
         }
         if (isEvent(fullCommand)) {
             String[] newInput = validateEvent(fullCommand);
             if (isDate(newInput[1]) && isDate(newInput[2])) {
                 LocalDateTime date1 = parseDate(newInput[1]);
                 LocalDateTime date2 = parseDate(newInput[2]);
-                return new addEventCommand(newInput[0], date1, date2);
+                return new AddEventCommand(newInput[0], date1, date2);
             }
-            return new addEventCommand(newInput[0], newInput[1]);
+            return new AddEventCommand(newInput[0], newInput[1]);
         }
         else {
             throw StarException.unknownCommand();

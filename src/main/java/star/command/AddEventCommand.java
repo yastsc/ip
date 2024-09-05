@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
  * Represents a Command to add a new Event task to the task list.
  * Inherits from the Command class.
  */
-public class addEventCommand extends Command {
+public class AddEventCommand extends Command {
     private String description;
     private String by;
     private LocalDateTime date1;
@@ -23,7 +23,7 @@ public class addEventCommand extends Command {
      * @param description which is the task description.
      * @param by which is the event date and time in String form.
      */
-    public addEventCommand(String description, String by) {
+    public AddEventCommand(String description, String by) {
         this.description = description;
         this.by = by;
     }
@@ -34,7 +34,7 @@ public class addEventCommand extends Command {
      * @param date1 which is the start date and time of the event.
      * @param date2 which is the end date and time of the event.
      */
-    public addEventCommand(String description, LocalDateTime date1, LocalDateTime date2) {
+    public AddEventCommand(String description, LocalDateTime date1, LocalDateTime date2) {
         this.description = description;
         this.date1 = date1;
         this.date2 = date2;

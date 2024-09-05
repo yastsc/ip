@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
  * Represents a Command to add a new Deadline task to the task list.
  * Inherits from the Command class.
  */
-public class addDeadlineCommand extends Command {
+public class AddDeadlineCommand extends Command {
     private String description;
     private String by;
     private LocalDateTime date;
@@ -22,7 +22,7 @@ public class addDeadlineCommand extends Command {
      * @param description which is the task description.
      * @param by which is the deadline in String form for the task.
      */
-    public addDeadlineCommand(String description, String by) {
+    public AddDeadlineCommand(String description, String by) {
         this.description = description;
         this.by = by;
     }
@@ -32,7 +32,7 @@ public class addDeadlineCommand extends Command {
      * @param description which is the task description.
      * @param date which is the deadline in LocalDate form for the task.
      */
-    public addDeadlineCommand(String description, LocalDateTime date) {
+    public AddDeadlineCommand(String description, LocalDateTime date) {
         this.description = description;
         this.date = date;
     }
