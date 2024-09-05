@@ -11,8 +11,8 @@ import star.main.Ui;
 public class exitCommand extends Command {
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showBye();
+    public StringBuilder execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.showBye();
     }
 
     @Override

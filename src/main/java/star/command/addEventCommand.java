@@ -41,7 +41,7 @@ public class addEventCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws StarException {
+    public StringBuilder execute(TaskList tasks, Ui ui, Storage storage) throws StarException {
         Event event;
         if (date1 == null || date2 == null) {
             event = new Event(description, by);
@@ -50,8 +50,7 @@ public class addEventCommand extends Command {
         }
 
         tasks.addTask(event);
-        ui.addSuccessMsg(event, tasks.length());
         storage.save(tasks.getTasks());
-
+        return ui.addSuccessMsg(event, tasks.length());
     }
 }

@@ -22,10 +22,10 @@ public class deleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws StarException {
+    public StringBuilder execute(TaskList tasks, Ui ui, Storage storage) throws StarException {
         Task deletedTask = tasks.getTask(zeroIndex);
         tasks.deleteTask(zeroIndex);
-        ui.deleteSuccessMsg(deletedTask, tasks.length());
         storage.save(tasks.getTasks());
+        return ui.deleteSuccessMsg(deletedTask, tasks.length());
     }
 }
