@@ -96,10 +96,7 @@ public class Parser {
 
     public static boolean isDate(String input) {
         String[] splitInput = input.split("-");
-        if (splitInput.length != 3 || isNotNumber(splitInput[0]) || isNotNumber(splitInput[1])) {
-            return false;
-        }
-        return true;
+        return splitInput.length == 3 && !isNotNumber(splitInput[0]) && !isNotNumber(splitInput[1]);
     }
 
     public static LocalDateTime parseDate(String input) {
