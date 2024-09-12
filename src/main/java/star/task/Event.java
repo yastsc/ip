@@ -17,59 +17,61 @@ public class Event extends Task {
         this.dates = dates;
     }
 
-//    public String getDateTime() {
-//        String[] strArray = super.getDescription().split("/");
-//        String[] startArr = strArray[1].split(" ", 2);
-//        String startRes = (startArr.length > 1) ? startArr[1] : "";
-//        String[] endArr = (strArray.length > 2) ? strArray[2].split(" ", 2) : null;
-//        String endRes = ((endArr != null)) ? (endArr.length > 2) ? endArr[1] : "" : "";
-//        LocalDate d1 = null;
-//        DateTimeFormatter formatterDate = new DateTimeFormatterBuilder()
-//                .parseCaseInsensitive()
-//                .appendPattern("yyyy-MM-dd").toFormatter();
-//        if (startRes.contains("-")) {
-//            d1 = LocalDate.parse(startRes, formatterDate);
-//        }
-//        return "(from: "  + ((d1 != null) ? d1.format(DateTimeFormatter.ofPattern("MMM d yyyy")) : startRes) +
-//                ((!Objects.equals(endRes, "")) ? " to: " + endRes + ")" : ")");
-//    }
-//
-//    public String getTask() {
-//        String[] strArray = super.getDescription().split("/");
-//        String[] startArr = strArray[0].split(" ", 2);
-//        return startArr[1];
-//    }
+    public Event(String description, String tag, String by) {
+        super(description, tag);
+        this.by = by;
+    }
+
+    public Event(String description, String tag, LocalDateTime... dates) {
+        super(description, tag);
+        this.dates = dates;
+    }
 
     @Override
     public String getOutput() {
         if (by == null) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
             if (dates.length == 2) {
-                return String.format("E | %d | %s | from %s to %s", isDone ? 1 : 0,
+                return hasTag() ? String.format("E | %d | %s | %s | from %s to %s", isDone ? 1 : 0,
+                        description, super.tag, dates[0].format(formatter), dates[1].format(formatter))
+                        : String.format("E | %d | %s | from %s to %s", isDone ? 1 : 0,
                         description, dates[0].format(formatter), dates[1].format(formatter));
             } else if (dates.length == 1) {
-                return String.format("E | %d | %s | at %s", isDone ? 1 : 0,
+                return hasTag() ? String.format("E | %d | %s | %s | at %s", isDone ? 1 : 0,
+                        description, super.tag, dates[0].format(formatter))
+                        : String.format("E | %d | %s | at %s", isDone ? 1 : 0,
                         description, dates[0].format(formatter));
-            } else {
-                return String.format("E | %d | %s | no dates provided", isDone ? 1 : 0, description);
             }
+//            else {
+//                return hasTag() ? String.format("E | %d | %s | %s | no dates provided", isDone ? 1 : 0,
+//                        description, super.tag)
+//                        : String.format("E | %d | %s | no dates provided", isDone ? 1 : 0, description);
+//            }
         }
-        return String.format("E | %d | %s | %s", isDone ? 1 : 0, description, by);
+        return hasTag() ? String.format("E | %d | %s | %s | %s", isDone ? 1 : 0, description, super.tag, by)
+                : String.format("E | %d | %s | %s", isDone ? 1 : 0, description, by);
     }
 
     @Override
     public String toString() {
         if (by == null) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy H/h:mm");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
             if (dates.length == 2) {
-                return String.format("[E] %s (from: %s to: %s)", super.toString(),
+                return hasTag() ? String.format("[E] %s (from: %s to: %s) #%s", super.toString(),
+                        dates[0].format(formatter), dates[1].format(formatter), super.tag)
+                        : String.format("[E] %s (from: %s to: %s)", super.toString(),
                         dates[0].format(formatter), dates[1].format(formatter));
             } else if (dates.length == 1) {
-                return String.format("[E] %s (at: %s)", super.toString(), dates[0].format(formatter));
-            } else {
-                return String.format("[E] %s (no dates provided)", super.toString());
+                return hasTag() ? String.format("[E] %s (at: %s) #%s", super.toString(),
+                        dates[0].format(formatter), super.tag)
+                        : String.format("[E] %s (at: %s)", super.toString(), dates[0].format(formatter));
             }
+//          else {
+//                return hasTag() ? String.format("[E] %s (no dates provided) #%s", super.toString(), super.tag)
+//                        : String.format("[E] %s (no dates provided)", super.toString());
+//            }
         }
-        return String.format("[E] %s (by: %s)", super.toString(), by);
+        return hasTag() ? String.format("[E] %s (at: %s) #%s", super.toString(), by, super.tag)
+                : String.format("[E] %s (at: %s)", super.toString(), by);
     }
 }

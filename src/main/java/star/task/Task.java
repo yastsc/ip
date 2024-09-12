@@ -7,6 +7,7 @@ package star.task;
 public class Task {
 
     protected String description;
+    protected String tag;
     protected boolean isDone;
 
     /**
@@ -16,6 +17,12 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+    }
+
+    public Task(String description, String tag) {
+        this.description = description;
+        this.isDone = false;
+        this.tag = tag;
     }
 
     /**
@@ -40,6 +47,18 @@ public class Task {
     public void markUndone() {
         this.isDone = false;
 //        System.out.println("oops it seems that this task isn't done yet: \n" + this);
+    }
+
+    public boolean hasTag() {
+        return tag != null;
+    }
+
+    /**
+     * Gets the tag of the task, given there is one.
+     * @return a String of the tag given to the task.
+     */
+    public String getTag() {
+        return this.tag;
     }
 
     /**

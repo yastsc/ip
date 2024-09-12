@@ -43,23 +43,49 @@ public class Parser {
             return new DeleteCommand(Integer.parseInt(newInput[1]));
         }
         if (isTodo(fullCommand)) {
-            String[] newInput = fullCommand.split(" ");
-            return new AddToDoCommand(newInput[1]);
+            String[] newInput = fullCommand.split(" ", 2);
+            String[] arr = validateTodo(newInput[1]);
+            if (arr.length == 2) {
+                System.out.println(arr[1]);
+                return new AddToDoCommand(arr[0], arr[1]);
+            }
+            System.out.println(arr[0]);
+            return new AddToDoCommand(arr[0]);
         }
         if (isDeadline(fullCommand)) {
             String[] newInput = validateDeadline(fullCommand);
+            System.out.println(newInput[1]);
             if (isDate(newInput[1])) {
                 LocalDateTime date = parseDate(newInput[1]);
-                return new AddDeadlineCommand(newInput[0], date);
+                if (newInput.length > 2) {
+                    return new AddDeadlineCommand(newInput[0], date, newInput[2]);
+                } else {
+                    return new AddDeadlineCommand(newInput[0], date);
+                }
             }
-            return new AddDeadlineCommand(newInput[0], newInput[1]);
+            if (newInput.length > 2) {
+                return new AddDeadlineCommand(newInput[0], newInput[1], newInput[2]);
+            } else {
+                return new AddDeadlineCommand(newInput[0], newInput[1]);
+            }
         }
         if (isEvent(fullCommand)) {
             String[] newInput = validateEvent(fullCommand);
+            if (newInput.length < 3) {
+                return new AddEventCommand(newInput[0], newInput[1]);
+            }
             if (isDate(newInput[1]) && isDate(newInput[2])) {
                 LocalDateTime date1 = parseDate(newInput[1]);
                 LocalDateTime date2 = parseDate(newInput[2]);
+                if (newInput.length > 3) {
+                    return new AddEventCommand(newInput[0], date1, date2, newInput[3]);
+                }
                 return new AddEventCommand(newInput[0], date1, date2);
+            } else if (newInput[1].contains("-") && newInput[2].contains("-")) {
+                throw new StarException("oopsie! that's the wrong date format!");
+            }
+            if (newInput.length > 2 && !newInput[2].contains("-")) {
+                return new AddEventCommand(newInput[0], newInput[1], newInput[2]);
             }
             return new AddEventCommand(newInput[0], newInput[1]);
         }
@@ -111,8 +137,10 @@ public class Parser {
      */
     public static boolean isDate(String input) {
         String[] splitInput = input.split("-");
-        boolean inputIsNotNumber = !isNotNumber(splitInput[0]) && !isNotNumber(splitInput[1]);
-        return splitInput.length == 3 && inputIsNotNumber;
+        System.out.println(splitInput[2]);
+        boolean inputIsNotNumber = isNotNumber(splitInput[0]) || isNotNumber(splitInput[1])
+                || !isNotNumber(splitInput[2]);
+        return splitInput.length == 3 && !inputIsNotNumber;
     }
 
     /**
@@ -122,6 +150,7 @@ public class Parser {
      */
     public static LocalDateTime parseDate(String input) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+        System.out.println("hm");
         return LocalDateTime.parse(input, formatter);
 
     }
@@ -130,10 +159,11 @@ public class Parser {
         return !input.matches("[-+]?\\d*\\.?\\d+");
     }
 
-    private static void validateTodo(String input) throws StarException {
+    private static String[] validateTodo(String input) throws StarException {
         if (input.isEmpty()) {
             throw StarException.emptyTodo();
         }
+        return input.split(" /tag ");
     }
 
     private static String[] validateEventDeadline(String input, String replaceText, String splitText, String type) throws StarException {
@@ -141,6 +171,7 @@ public class Parser {
 
         for (int i = 0; i < splitInput.length; i++) {
             splitInput[i] = splitInput[i].trim();
+            System.out.println(splitInput[i]);
         }
 
         boolean blankSplitInput = splitInput[0].isBlank() || splitInput[1].isBlank();
@@ -157,12 +188,29 @@ public class Parser {
 
     private static String[] validateEvent(String input) throws StarException {
         String[] strArr = validateEventDeadline(input, "event", "/", "E");
-        strArr[1] = strArr[1].replace("from ", ""); // 12/05/2020 0300 /to 31/05/2020 0600
+        if (strArr.length < 3 && strArr[1].contains("at")) {
+            strArr[1] = strArr[1].replace("at ", "");
+            return strArr;
+        }
+        if (strArr.length < 4 && strArr[2].contains("tag") && strArr[1].contains("at")) {
+            strArr[1] = strArr[1].replace("at ", "");
+            strArr[2] = strArr[2].replace("tag ", "");
+            return strArr;
+        }
+        strArr[1] = strArr[1].replace("from ", ""); // 12-05-2020 0300 /to 31-05-2020 0600
         strArr[2] = strArr[2].replace("to ", "");
+        if (strArr.length == 4) {
+            strArr[3] = strArr[3].replace("tag ", "");
+        }
         return strArr;
     }
 
     private static String[] validateDeadline(String input) throws StarException {
-        return validateEventDeadline(input, "deadline", "/by", "D");
+        String[] strArr = validateEventDeadline(input, "deadline", "/", "D");
+        strArr[1] = strArr[1].replace("by ", ""); // 12-05-2020 0300 /to 31-05-2020 0600
+        if (strArr.length > 2) {
+            strArr[2] = strArr[2].replace("tag ", "");
+        }
+        return strArr;
     }
 }

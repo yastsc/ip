@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 public class AddDeadlineCommand extends Command {
     private String description;
     private String by;
+    private String tag;
     private LocalDateTime date;
 
     /**
@@ -37,15 +38,34 @@ public class AddDeadlineCommand extends Command {
         this.date = date;
     }
 
+    public AddDeadlineCommand(String description, String by, String tag) {
+        this.description = description;
+        this.by = by;
+        this.tag = tag;
+    }
+
+    public AddDeadlineCommand(String description, LocalDateTime date, String tag) {
+        this.description = description;
+        this.date = date;
+        this.tag = tag;
+    }
+
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws StarException {
         Deadline deadline;
-        if (date == null) {
-            deadline = new Deadline(description, by);
+        if (tag != null) {
+            if (date == null) {
+                deadline = new Deadline(description, tag, by);
+            } else {
+                deadline = new Deadline(description, tag, date);
+            }
         } else {
-            deadline = new Deadline(description, date);
+            if (date == null) {
+                deadline = new Deadline(description, by);
+            } else {
+                deadline = new Deadline(description, date);
+            }
         }
-
         tasks.addTask(deadline);
         storage.save(tasks.getTasks());
         return ui.addSuccessMsg(deadline, tasks.length());

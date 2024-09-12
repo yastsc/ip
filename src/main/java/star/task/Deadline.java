@@ -17,51 +17,35 @@ public class Deadline extends Task {
         this.date = date;
     }
 
-//    public String getDeadline() {
-//        String[] strArray = super.getDescription().split("/", 2);
-//        String[] startArr = strArray[1].split(" ");
-//        DateTimeFormatter formatterDate = new DateTimeFormatterBuilder()
-//                .parseCaseInsensitive()
-//                .appendPattern("d/M/yyyy").toFormatter();
-//        DateTimeFormatter formatterTime = new DateTimeFormatterBuilder()
-//                .parseCaseInsensitive()
-//                .appendPattern("HHmm")
-//                .toFormatter();
-//        String endDate = (startArr.length > 1) ? startArr[1] : "";
-//        String endTime = (startArr.length > 1) ? startArr[2] : "";
-//        LocalDate d1 = null;
-//        LocalTime t1 = null;
-//        if (!Objects.equals(endDate, "")) {
-//            d1 = LocalDate.parse(endDate, formatterDate);
-//        }
-//        if (!Objects.equals(endTime, "")) {
-//            t1 = LocalTime.parse(endTime, formatterTime);
-//        }
-//        return "(by: " + ((d1 != null) ? d1.format(DateTimeFormatter.ofPattern("MMM d yyyy")) : "") + " " +
-//                ((t1 != null) ? t1.format(DateTimeFormatter.ofPattern("hh:mm a")) : "") + ")";
-//    }
-//
-//    public String getTask() {
-//        String[] strArray = super.getDescription().split("/");
-//        String[] startArr = strArray[0].split(" ", 2);
-//        return startArr[1];
-//    }
+    public Deadline(String description, String tag, String by) {
+        super(description, tag);
+        this.by = by;
+    }
+    public Deadline(String description, String tag, LocalDateTime date) {
+        super(description, tag);
+        this.date = date;
+    }
 
     @Override
     public String getOutput() {
         if (by == null) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
-            return String.format("D | %d | %s | %s", isDone ? 1 : 0, description, date.format(formatter));
+            return hasTag() ? String.format("D | %d | %s | #%s | %s", isDone ? 1 : 0, description, super.tag,
+                    date.format(formatter))
+                    : String.format("D | %d | %s | %s", isDone ? 1 : 0, description, date.format(formatter));
         }
-        return String.format("D | %d | %s | %s", isDone ? 1 : 0, description, by);
+        return hasTag() ? String.format("D | %d | %s | #%s | %s", isDone ? 1 : 0, description, super.tag, by)
+                : String.format("D | %d | %s | %s", isDone ? 1 : 0, description, by);
     }
 
     @Override
     public String toString() {
         if (by == null) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
-            return String.format("[D] %s (by: %s)", super.toString(), date.format(formatter));
+            return hasTag() ? String.format("[D] %s (by: %s) #%s", super.toString(), date.format(formatter), super.tag)
+                    : String.format("[D] %s (by: %s)", super.toString(), date.format(formatter));
         }
-        return String.format("[D] %s (by: %s)", super.toString(), by);
+        return hasTag() ? String.format("[D] %s (by: %s) #%s", super.toString(), by, super.tag)
+                : String.format("[D] %s (by: %s)", super.toString(), by);
     }
 }

@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 public class AddEventCommand extends Command {
     private String description;
     private String by;
+    private String tag;
     private LocalDateTime date1;
     private LocalDateTime date2;
 
@@ -40,13 +41,35 @@ public class AddEventCommand extends Command {
         this.date2 = date2;
     }
 
+    public AddEventCommand(String description, String by, String tag) {
+        this.description = description;
+        this.by = by;
+        this.tag = tag;
+    }
+
+
+    public AddEventCommand(String description, LocalDateTime date1, LocalDateTime date2, String tag) {
+        this.description = description;
+        this.date1 = date1;
+        this.date2 = date2;
+        this.tag = tag;
+    }
+
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws StarException {
         Event event;
-        if (date1 == null || date2 == null) {
-            event = new Event(description, by);
+        if (tag == null) {
+            if (date1 == null || date2 == null) {
+                event = new Event(description, by);
+            } else {
+                event = new Event(description, date1, date2);
+            }
         } else {
-            event = new Event(description, date1, date2);
+            if (date1 == null || date2 == null) {
+                event = new Event(description, tag, by);
+            } else {
+                event = new Event(description, tag, date1, date2);
+            }
         }
 
         tasks.addTask(event);

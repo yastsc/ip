@@ -4,6 +4,7 @@ import star.exception.StarException;
 import star.main.Storage;
 import star.main.TaskList;
 import star.main.Ui;
+import star.task.Task;
 import star.task.ToDo;
 
 /**
@@ -12,6 +13,7 @@ import star.task.ToDo;
  */
 public class AddToDoCommand extends Command {
     private String description;
+    private String tag;
 
     /**
      * Constructs a new addToDoCommand with the new ToDo task description.
@@ -20,10 +22,20 @@ public class AddToDoCommand extends Command {
     public AddToDoCommand(String description) {
         this.description = description;
     }
+    public AddToDoCommand(String description, String tag) {
+        this.description = description;
+        this.tag = tag;
+    }
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws StarException {
-        ToDo todo = new ToDo(description);
+        ToDo todo;
+        if (tag == null) {
+            todo = new ToDo(description);
+        } else {
+            System.out.println(tag);
+            todo = new ToDo(description, tag);
+        }
         tasks.addTask(todo);
         storage.save(tasks.getTasks());
         return ui.addSuccessMsg(todo, tasks.length());
