@@ -7,8 +7,18 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
+/**
+ * Deals with making sense of the user command.
+ * Parses the input command to determine what actions need to be executed.
+ */
 public class Parser {
 
+    /**
+     * Parses the fullCommand input String and returns the corresponding Command object.
+     * @param fullCommand which is the full user input String.
+     * @return the matching Command object.
+     * @throws StarException if the command is invalid or the input is incomplete.
+     */
     static Command parse(String fullCommand) throws StarException {
         if (isExit(fullCommand)) {
             return new ExitCommand();
@@ -94,14 +104,26 @@ public class Parser {
         return Objects.equals(input, "list");
     }
 
+    /**
+     * Parses an input String to identify if it is in a date format.
+     * @param input which is the input String to be parsed.
+     * @return True if the input String is in date format and False otherwise.
+     */
     public static boolean isDate(String input) {
         String[] splitInput = input.split("-");
-        if (splitInput.length != 3 || isNotNumber(splitInput[0]) || isNotNumber(splitInput[1])) {
-            return false;
-        }
-        return true;
+<<<<<<< HEAD
+        return splitInput.length == 3 && !isNotNumber(splitInput[0]) && !isNotNumber(splitInput[1]);
+=======
+        boolean inputIsNotNumber = !isNotNumber(splitInput[0]) && !isNotNumber(splitInput[1]);
+        return splitInput.length == 3 && inputIsNotNumber;
+>>>>>>> branch-A-CodeQuality
     }
 
+    /**
+     * Convert an input String into a LocalDateTime object.
+     * @param input which is the input String to be converted.
+     * @return LocalDateTime object using the DateTimeFormatter object to convert the input String.
+     */
     public static LocalDateTime parseDate(String input) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
         return LocalDateTime.parse(input, formatter);
@@ -125,7 +147,9 @@ public class Parser {
             splitInput[i] = splitInput[i].trim();
         }
 
-        if (splitInput.length < 2 || splitInput[0].isBlank() || splitInput[1].isBlank()) {
+        boolean blankSplitInput = splitInput[0].isBlank() || splitInput[1].isBlank();
+
+        if (splitInput.length < 2 || blankSplitInput) {
             if (type.equals("E")) {
                 throw StarException.emptyEvent();
             } else {
@@ -145,8 +169,4 @@ public class Parser {
     private static String[] validateDeadline(String input) throws StarException {
         return validateEventDeadline(input, "deadline", "/by", "D");
     }
-
-
-
-
 }
