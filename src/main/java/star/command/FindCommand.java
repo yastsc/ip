@@ -10,6 +10,7 @@ import star.main.Ui;
  */
 public class FindCommand extends Command {
     private String keyword;
+    private static final String FIND_MSG = "these tasks match what you were looking for!";
 
     /**
      * Constructs a findCommand that finds tasks containing the given String keyword.
@@ -21,6 +22,6 @@ public class FindCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        return ui.printList(tasks.findTasks(this.keyword), "these tasks match what you were looking for!");
+        return ui.printList(tasks.findTasks(this.keyword), FIND_MSG);
     }
 }

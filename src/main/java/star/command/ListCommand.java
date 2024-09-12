@@ -9,10 +9,10 @@ import star.main.Ui;
  * Inherits from the Command class.
  */
 public class ListCommand extends Command {
+    private static final String LIST_MSG = "here's everything in your list!\n";
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-
-        return ui.printList(tasks.getTasks(), "here's everything in your list! \n");
+        return ui.printList(tasks.getTasks(), LIST_MSG);
     }
 }
