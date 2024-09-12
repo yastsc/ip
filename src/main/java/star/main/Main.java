@@ -23,7 +23,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             MainWindow controller = fxmlLoader.getController();
-            controller.setStar(star);  // inject the Duke instance
+            controller.setStar(star);  // inject the Star instance
             controller.showStarStartMessage();
             stage.show();
         } catch (IOException e) {
@@ -31,21 +31,3 @@ public class Main extends Application {
         }
     }
 }
-
-
-
-//    @Override
-//    public void start(Stage stage1) {
-//        Stage stage2 = new Stage();
-//        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-//        Label whee = new Label("WHEE!"); // Creating a new Label control
-//        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
-//        Scene scene2 = new Scene(whee);
-//        helloWorld.setFont(new Font("Arial", 50));
-//        stage1.setScene(scene); // Setting the stage to show our scene
-//        stage1.show(); // Render the stage.
-//        stage2.setScene(scene2); // Setting the stage to show our scene
-//        stage2.show(); // Render the stage.
-//    }
-
-
