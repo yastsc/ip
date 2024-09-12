@@ -55,7 +55,7 @@ public class MainWindow extends AnchorPane {
         // Create a pause (delay)
         PauseTransition delay = new PauseTransition(Duration.seconds(0.5)); // 1-second delay
         delay.setOnFinished(event -> {
-            // Add Duke's response after the delay
+            // Add Star's response after the delay
             dialogContainer.getChildren().add(
                     DialogBox.getStarDialog(response, starImage)
             );
