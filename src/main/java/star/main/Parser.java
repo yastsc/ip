@@ -111,17 +111,8 @@ public class Parser {
      */
     public static boolean isDate(String input) {
         String[] splitInput = input.split("-");
-<<<<<<< HEAD
-<<<<<<< HEAD
-        return splitInput.length == 3 && !isNotNumber(splitInput[0]) && !isNotNumber(splitInput[1]);
-=======
         boolean inputIsNotNumber = !isNotNumber(splitInput[0]) && !isNotNumber(splitInput[1]);
         return splitInput.length == 3 && inputIsNotNumber;
->>>>>>> branch-A-CodeQuality
-=======
-        boolean inputIsNotNumber = !isNotNumber(splitInput[0]) && !isNotNumber(splitInput[1]);
-        return splitInput.length == 3 && inputIsNotNumber;
->>>>>>> 92bd914fdfe15cd13318e6d37a1a95c7be5a0659
     }
 
     /**
