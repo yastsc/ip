@@ -61,7 +61,6 @@ public class Storage {
     }
 
     public void save(ArrayList<Task> taskList) throws StarException {
-
         File fileDir = new File("./data");
         if (!fileDir.exists()) {
             fileDir.mkdirs();
