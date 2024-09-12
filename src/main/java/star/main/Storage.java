@@ -9,13 +9,27 @@ import star.task.ToDo;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * Deals with loading tasks from a file and saving tasks to a file.
+ * Allows tasks in the taskList to be saved to a file and retrieved when the application is restarted.
+ */
 public class Storage {
     private String filePath;
 
+    /**
+     * Constructs a new Storage object with the specified filePath.
+     *
+     * @param filePath which is the path to where the file is stored
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Method to load tasks from the designated file to the taskList.
+     * @return a taskList, which is an ArrayList of Task objects loaded from the file.
+     * @throws StarException if an I/O exception occurs while reading the file.
+     */
     public ArrayList<Task> load() throws StarException {
         ArrayList<Task> tasks = new ArrayList<>();
 
@@ -60,6 +74,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Method to save tasks from the taskList to the designated file.
+     * @param taskList which is the ArrayList of Task objects to save.
+     * @throws StarException if an I/O exception occurs while writing to the file.
+     */
     public void save(ArrayList<Task> taskList) throws StarException {
 
         File fileDir = new File("./data");

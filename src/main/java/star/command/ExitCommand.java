@@ -12,12 +12,13 @@ import star.main.Ui;
  * Inherits from the Command class.
  */
 public class ExitCommand extends Command {
+    private static final String BYE_MSG = "bye bye! come by again soon :)\n";
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        System.out.println("bye bye! come by again soon :)\n");
+        System.out.println(BYE_MSG);
         PauseTransition delay = new PauseTransition(Duration.seconds(2.5));
-        delay.setOnFinished(event -> Platform.exit());  // Close the application after the delay
+        delay.setOnFinished(event -> Platform.exit());  // close the application after the delay
         delay.play();
         return ui.showBye();
     }
