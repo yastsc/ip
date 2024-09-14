@@ -41,6 +41,12 @@ public class AddEventCommand extends Command {
         this.date2 = date2;
     }
 
+    /**
+     * Constructs an addEventCommand with the Event task description, event date and time and the assigned tag.
+     * @param description which is the task description.
+     * @param by which is the event date and time in String form.
+     * @param tag which is the tag assigned to this task.
+     */
     public AddEventCommand(String description, String by, String tag) {
         this.description = description;
         this.by = by;
@@ -48,6 +54,13 @@ public class AddEventCommand extends Command {
     }
 
 
+    /**
+     * Constructs an addEventCommand with the Event task description, event date and time and the assigned tag.
+     * @param description which is the task description.
+     * @param date1 which is the start date and time of the event.
+     * @param date2 which is the end date and time of the event.
+     * @param tag which is the tag assigned to this task.
+     */
     public AddEventCommand(String description, LocalDateTime date1, LocalDateTime date2, String tag) {
         this.description = description;
         this.date1 = date1;

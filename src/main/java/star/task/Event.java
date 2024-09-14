@@ -42,11 +42,6 @@ public class Event extends Task {
                         : String.format("E | %d | %s | at %s", isDone ? 1 : 0,
                         description, dates[0].format(formatter));
             }
-//            else {
-//                return hasTag() ? String.format("E | %d | %s | %s | no dates provided", isDone ? 1 : 0,
-//                        description, super.tag)
-//                        : String.format("E | %d | %s | no dates provided", isDone ? 1 : 0, description);
-//            }
         }
         return hasTag() ? String.format("E | %d | %s | %s | %s", isDone ? 1 : 0, description, super.tag, by)
                 : String.format("E | %d | %s | %s", isDone ? 1 : 0, description, by);
@@ -66,10 +61,6 @@ public class Event extends Task {
                         dates[0].format(formatter), super.tag)
                         : String.format("[E] %s (at: %s)", super.toString(), dates[0].format(formatter));
             }
-//          else {
-//                return hasTag() ? String.format("[E] %s (no dates provided) #%s", super.toString(), super.tag)
-//                        : String.format("[E] %s (no dates provided)", super.toString());
-//            }
         }
         return hasTag() ? String.format("[E] %s (at: %s) #%s", super.toString(), by, super.tag)
                 : String.format("[E] %s (at: %s)", super.toString(), by);

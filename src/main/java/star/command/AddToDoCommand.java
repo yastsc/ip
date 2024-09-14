@@ -22,6 +22,12 @@ public class AddToDoCommand extends Command {
     public AddToDoCommand(String description) {
         this.description = description;
     }
+
+    /**
+     * Constructs a new addToDoCommand with the new ToDo task description and assigned tag.
+     * @param description which is the description of the task to be added.
+     * @param tag which is the tag assigned to the task.
+     */
     public AddToDoCommand(String description, String tag) {
         this.description = description;
         this.tag = tag;

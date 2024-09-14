@@ -38,12 +38,24 @@ public class AddDeadlineCommand extends Command {
         this.date = date;
     }
 
+    /**
+     * Constructs an addDeadlineCommand with the Deadline task description, deadline date and the assigned tag.
+     * @param description which is the task description.
+     * @param by which is the deadline in String form for the task.
+     * @param tag which is the tag assigned to this task.
+     */
     public AddDeadlineCommand(String description, String by, String tag) {
         this.description = description;
         this.by = by;
         this.tag = tag;
     }
 
+    /**
+     * Constructs an addDeadlineCommand with the Deadline task description, deadline date and the assigned tag.
+     * @param description which is the task description.
+     * @param date which is the deadline in LocalDate form for the task.
+     * @param tag which is the tag assigned to this task.
+     */
     public AddDeadlineCommand(String description, LocalDateTime date, String tag) {
         this.description = description;
         this.date = date;
