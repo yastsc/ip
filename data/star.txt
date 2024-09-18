@@ -1,6 +1,6 @@
 T | 1 | read
 T | 0 | whee
-T | 0 | run
+T | 1 | run
 T | 0 | fall
 T | 0 | hide
 T | 0 | run
@@ -62,3 +62,6 @@ D | 0 | project | #work
 D | 0 | run | 13-09-2020
 E | 0 | whee | from Sep 13 2020 03:00 to Sep 14 2024 04:00
 D | 0 | run | 20-09-2024
+E | 0 | jog | 13-09-2020
+T | 0 | run
+T | 0 | play
