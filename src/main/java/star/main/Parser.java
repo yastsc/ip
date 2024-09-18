@@ -1,11 +1,11 @@
 package star.main;
 
-import star.exception.StarException;
-import star.command.*;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
+
+import star.command.*;
+import star.exception.StarException;
 
 /**
  * Deals with making sense of the user command.
@@ -54,8 +54,7 @@ public class Parser {
         if (isEvent(fullCommand)) {
             String[] userInput = validateEvent(fullCommand);
             return parseEvent(userInput);
-        }
-        else {
+        } else {
             throw StarException.unknownCommand();
         }
     }
@@ -131,7 +130,8 @@ public class Parser {
         return input.split(" /tag ");
     }
 
-    private static String[] validateEventDeadline(String input, String replaceText, String splitText, String type) throws StarException {
+    private static String[] validateEventDeadline(String input, String replaceText,
+                                                  String splitText, String type) throws StarException {
         String[] splitInput = input.replaceFirst(replaceText, "").trim().split(splitText);
 
         for (int i = 0; i < splitInput.length; i++) {

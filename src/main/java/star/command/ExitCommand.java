@@ -18,7 +18,7 @@ public class ExitCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         System.out.println(BYE_MSG);
         PauseTransition delay = new PauseTransition(Duration.seconds(2.5));
-        delay.setOnFinished(event -> Platform.exit());  // close the application after the delay
+        delay.setOnFinished(event -> Platform.exit()); // close the application after the delay
         delay.play();
         return ui.showBye();
     }

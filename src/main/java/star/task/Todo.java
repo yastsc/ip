@@ -31,7 +31,7 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-            return hasTag() ? "[T]" + super.toString() + String.format(" #%s", super.tag)
-                    : "[T]" + super.toString();
+        return hasTag() ? "[T]" + super.toString() + String.format(" #%s", super.tag)
+                : "[T]" + super.toString();
     }
 }

@@ -1,10 +1,11 @@
 package star.main;
 
-import javafx.application.Platform;
 import star.command.*;
 import star.exception.StarException;
 
-
+/**
+ * Star is a chatbot that allows users to manage their tasks.
+ */
 public class Star {
 
     private Storage storage;

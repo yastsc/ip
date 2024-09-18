@@ -12,7 +12,6 @@ import javafx.stage.Stage;
  * A GUI for Star using FXML.
  */
 public class Main extends Application {
-
     private Star star = new Star("data/star.txt");
 
     @Override
@@ -23,7 +22,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             MainWindow controller = fxmlLoader.getController();
-            controller.setStar(star);  // inject the Star instance
+            controller.setStar(star); // inject the Star instance
             controller.showStarStartMessage();
             stage.show();
         } catch (IOException e) {

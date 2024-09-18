@@ -14,6 +14,7 @@ import javafx.util.Duration;
  * Controller for the main GUI.
  */
 public class MainWindow extends AnchorPane {
+    private static final String HI_MSG = "hi! I'm Star :-) what's up?";
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -22,9 +23,7 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
-
     private Star star;
-    private static final String HI_MSG = "hi! I'm Star :-) what's up?";
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/me.jpg"));
     private Image starImage = new Image(this.getClass().getResourceAsStream("/images/Star.jpeg"));
@@ -66,6 +65,9 @@ public class MainWindow extends AnchorPane {
         delay.play();
     }
 
+    /**
+     * Shows the welcome message from Star's side
+     */
     public void showStarStartMessage() {
         dialogContainer.getChildren().add(
                 DialogBox.getStarDialog(HI_MSG, starImage)

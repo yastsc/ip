@@ -1,8 +1,8 @@
 package star.main;
 
-import star.task.Task;
-
 import java.util.ArrayList;
+
+import star.task.Task;
 
 /**
  * Represents the list of tasks and has operations to manipulate the task list.

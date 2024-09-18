@@ -19,6 +19,11 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * Constructs a general Task with the given description and tag.
+     * @param description which is a String that gives a description of the Task.
+     * @param tag String that gives the tag applied to the Task
+     */
     public Task(String description, String tag) {
         this.description = description;
         this.isDone = false;
@@ -38,7 +43,6 @@ public class Task {
      */
     public void markDone() {
         this.isDone = true;
-//        System.out.println("yay! this task is done: \n" + this);
     }
 
     /**
@@ -46,7 +50,6 @@ public class Task {
      */
     public void markUndone() {
         this.isDone = false;
-//        System.out.println("oops it seems that this task isn't done yet: \n" + this);
     }
 
     public boolean hasTag() {

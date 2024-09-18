@@ -1,13 +1,19 @@
 package star.main;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+
 import star.exception.StarException;
 import star.task.Deadline;
 import star.task.Event;
 import star.task.Task;
 import star.task.Todo;
-
-import java.io.*;
-import java.util.ArrayList;
 
 /**
  * Deals with loading tasks from a file and saving tasks to a file.
@@ -55,8 +61,8 @@ public class Storage {
                     task = new Event(inputs[2], inputs[3]);
                     break;
                 default:
-                    throw new StarException("uh oh! there was an error during parsing: an unexpected task" +
-                            "type was found.");
+                    throw new StarException("uh oh! there was an error during parsing: an unexpected task"
+                            + "type was found.");
                 }
 
                 if (Integer.parseInt(inputs[1]) == 1) {
@@ -83,12 +89,13 @@ public class Storage {
         if (!fileDir.exists()) {
             fileDir.mkdirs();
         }
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-                for (Task task : taskList) {
-                    writer.write(task.getOutput() + System.lineSeparator());
-                }
-            } catch (IOException e) {
-                System.out.println("something went wrong while saving :0 " + e.getMessage());
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            for (Task task : taskList) {
+                writer.write(task.getOutput() + System.lineSeparator());
             }
+        } catch (IOException e) {
+            System.out.println("something went wrong while saving :0 " + e.getMessage());
+        }
     }
 }

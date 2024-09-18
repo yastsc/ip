@@ -1,12 +1,12 @@
 package star.command;
 
+import java.time.LocalDateTime;
+
 import star.exception.StarException;
 import star.main.Storage;
 import star.main.TaskList;
 import star.main.Ui;
 import star.task.Event;
-
-import java.time.LocalDateTime;
 
 /**
  * Represents a Command to add a new Event task to the task list.

@@ -9,8 +9,8 @@ import star.main.Ui;
  * Inherits from the Command class.
  */
 public class FindCommand extends Command {
-    private String keyword;
     private static final String FIND_MSG = "these tasks match what you were looking for!";
+    private String keyword;
 
     /**
      * Constructs a findCommand that finds tasks containing the given String keyword.

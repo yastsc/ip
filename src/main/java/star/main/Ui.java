@@ -1,8 +1,8 @@
 package star.main;
 
-import star.task.Task;
-
 import java.util.ArrayList;
+
+import star.task.Task;
 
 public class Ui {
 
@@ -32,16 +32,16 @@ public class Ui {
 
     public String addSuccessMsg(Task task, int size) {
         assert task != null;
-        return "you have a new task: \n" + task + "\n" +
-                String.format((size == 1) ? "you now have %d task in the list!"
+        return "you have a new task: \n" + task + "\n"
+                + String.format((size == 1) ? "you now have %d task in the list!"
                                             : "you now have %d tasks in the list!", size);
 
     }
 
     public String deleteSuccessMsg(Task task, int size) {
         assert task != null;
-        return "okay! this task has been removed: \n" + task + "\n" +
-                String.format((size == 1) ? "now you have %d task left!"
+        return "okay! this task has been removed: \n" + task + "\n"
+                + String.format((size == 1) ? "now you have %d task left!"
                                             : "now you have %d tasks left!", size);
 
     }
