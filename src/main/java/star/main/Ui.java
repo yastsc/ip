@@ -63,15 +63,6 @@ public class Ui {
             s.append("\n").append(n).append(". ").append(tasks.get(n - 1));
         }
         return s.toString();
-
-//        StringBuilder output = new StringBuilder(message);
-//        System.out.println(tasks.get(19));
-//        for (int i = 0; i < tasks.size(); i++) {
-////            int oneIndex = i + 1;
-//            output.append(String.format("%d. %s", i + 1, tasks.get(i)));
-//        }
-//        System.out.println("help");
-//        return output.toString();
     }
 
     public void showLoadingError() {

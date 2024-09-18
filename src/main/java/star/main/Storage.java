@@ -4,7 +4,7 @@ import star.exception.StarException;
 import star.task.Deadline;
 import star.task.Event;
 import star.task.Task;
-import star.task.ToDo;
+import star.task.Todo;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -18,7 +18,6 @@ public class Storage {
 
     /**
      * Constructs a new Storage object with the specified filePath.
-     *
      * @param filePath which is the path to where the file is stored
      */
     public Storage(String filePath) {
@@ -47,7 +46,7 @@ public class Storage {
                 Task task;
                 switch (inputs[0]) {
                 case "T":
-                    task = new ToDo(inputs[2]);
+                    task = new Todo(inputs[2]);
                     break;
                 case "D":
                     task = new Deadline(inputs[2], inputs[3]);

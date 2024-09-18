@@ -3,25 +3,51 @@ package star.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents an Event task.
+ * Inherits from the Task class.
+ */
 public class Event extends Task {
     private String by;
     private LocalDateTime[] dates;
 
+    /**
+     * Constructs an Event task with the given description and details (not in date format).
+     * @param description String that gives the description of the Event task.
+     * @param by String that gives the date details of the Event task.
+     */
     public Event(String description, String by) {
         super(description);
         this.by = by;
     }
 
+    /**
+     * Constructs an Event task with the given description and dates (in date format).
+     * @param description String that gives the description of the Event task.
+     * @param dates LocalDateTime that gives the dates of the Event task.
+     */
     public Event(String description, LocalDateTime... dates) {
         super(description);
         this.dates = dates;
     }
 
+    /**
+     * Constructs an Event task with the given description, tag and details (not in date format).
+     * @param description String that gives the description of the Event task.
+     * @param tag String that gives the tag applied to the Event task.
+     * @param by String that gives the date details of the Event task.
+     */
     public Event(String description, String tag, String by) {
         super(description, tag);
         this.by = by;
     }
 
+    /**
+     * Constructs an Event task with the given description, tag and dates (in date format).
+     * @param description String that gives the description of the Event task.
+     * @param tag String that gives the tag applied to the Event task.
+     * @param dates LocalDateTime that gives the dates of the Event task.
+     */
     public Event(String description, String tag, LocalDateTime... dates) {
         super(description, tag);
         this.dates = dates;

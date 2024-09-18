@@ -5,7 +5,7 @@ import star.main.Storage;
 import star.main.TaskList;
 import star.main.Ui;
 import star.task.Task;
-import star.task.ToDo;
+import star.task.Todo;
 
 /**
  * Represents a Command to add a new ToDo task to the task list.
@@ -35,12 +35,12 @@ public class AddToDoCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws StarException {
-        ToDo todo;
+        Todo todo;
         if (tag == null) {
-            todo = new ToDo(description);
+            todo = new Todo(description);
         } else {
             System.out.println(tag);
-            todo = new ToDo(description, tag);
+            todo = new Todo(description, tag);
         }
         tasks.addTask(todo);
         storage.save(tasks.getTasks());

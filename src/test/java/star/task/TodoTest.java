@@ -4,10 +4,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ToDoTest {
+public class TodoTest {
     @Test
     public void toDoTest() {
-        ToDo task = new ToDo("play game");
+        Todo task = new Todo("play game");
         assertEquals("[T][ ] play game", task.toString(), "toString() works!");
 
         task.markDone();

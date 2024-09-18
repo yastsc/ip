@@ -95,6 +95,11 @@ public class TaskList {
         tasks.get(zeroIndex).markUndone();
     }
 
+    /**
+     * Finds tasks in the tasklist that contain the given keyword.
+     * @param keyword String to find tasks in the tasklist containing that keyword in their description.
+     * @return an ArrayList of tasks containing the given keyword.
+     */
     public ArrayList<Task> findTasks(String keyword) {
         ArrayList<Task> findTaskList = new ArrayList<>();
         for (Task task : this.tasks) {

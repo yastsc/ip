@@ -14,7 +14,7 @@ public class Star {
 
     /**
      * Constructs a new instance of the chatbot Star.
-     *
+     * @param filePath is the path of the file used to store tasks from the taskList.
      */
     public Star(String filePath) {
         ui = new Ui();
@@ -27,6 +27,11 @@ public class Star {
         }
     }
 
+    /**
+     * Gets Star's 'response' to the user input.
+     * @param input the user input in String form.
+     * @return the String form of Star's 'response' to the user input.
+     */
     public String getResponse(String input) {
         if (isExit) {
             return "";

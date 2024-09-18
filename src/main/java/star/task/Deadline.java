@@ -3,24 +3,51 @@ package star.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-
+/**
+ * Represents a Deadline task.
+ * Inherits from the Task class.
+ */
 public class Deadline extends Task {
     private String by;
     private LocalDateTime date;
 
+    /**
+     * Constructs a Deadline task with the given description and deadline date details (not in date format).
+     * @param description String that gives the description of the Deadline task.
+     * @param by String that gives the date details of the Deadline task.
+     */
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
     }
+
+    /**
+     * Constructs a Deadline task with the given description and deadline date (in date format).
+     * @param description String that gives the description of the Deadline task.
+     * @param date LocalDateTime that gives the deadline date of the Deadline task.
+     */
     public Deadline(String description, LocalDateTime date) {
         super(description);
         this.date = date;
     }
 
+    /**
+     * Constructs a Deadline task with the given description, tag and deadline date details (not in date format).
+     * @param description String that gives the description of the Deadline task.
+     * @param tag String that gives the tag applied to the Deadline task.
+     * @param by String that gives the date details of the Deadline task.
+     */
     public Deadline(String description, String tag, String by) {
         super(description, tag);
         this.by = by;
     }
+
+    /**
+     * Constructs a Deadline task with the given description, tag and deadline date (in date format).
+     * @param description String that gives the description of the Deadline task.
+     * @param tag String that gives the tag applied to the Deadline task.
+     * @param date LocalDateTime that gives the deadline date of the Deadline task.
+     */
     public Deadline(String description, String tag, LocalDateTime date) {
         super(description, tag);
         this.date = date;
