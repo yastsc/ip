@@ -24,70 +24,36 @@ public class Parser {
             return new ExitCommand();
         }
         if (isDone(fullCommand)) {
-            String[] newInput = fullCommand.split(" ");
-            return new DoneCommand(Integer.parseInt(newInput[1]));
+            String[] userInput = fullCommand.split(" ");
+            return new DoneCommand(Integer.parseInt(userInput[1]));
         }
         if (isUndone(fullCommand)) {
-            String[] newInput = fullCommand.split(" ");
-            return new UndoneCommand(Integer.parseInt(newInput[1]));
+            String[] userInput = fullCommand.split(" ");
+            return new UndoneCommand(Integer.parseInt(userInput[1]));
         }
         if (isFind(fullCommand)) {
-            String[] newInput = fullCommand.split(" ");
-            return new FindCommand(newInput[1]);
+            String[] userInput = fullCommand.split(" ");
+            return new FindCommand(userInput[1]);
         }
         if (isList(fullCommand)) {
             return new ListCommand();
         }
         if (isDelete(fullCommand)) {
-            String[] newInput = fullCommand.split(" ");
-            return new DeleteCommand(Integer.parseInt(newInput[1]));
+            String[] userInput = fullCommand.split(" ");
+            return new DeleteCommand(Integer.parseInt(userInput[1]));
         }
         if (isTodo(fullCommand)) {
             String[] newInput = fullCommand.split(" ", 2);
-            String[] arr = validateTodo(newInput[1]);
-            if (arr.length == 2) {
-                System.out.println(arr[1]);
-                return new AddToDoCommand(arr[0], arr[1]);
-            }
-            System.out.println(arr[0]);
-            return new AddToDoCommand(arr[0]);
+            String[] userInput = validateTodo(newInput[1]);
+            return parseTodo(userInput);
         }
         if (isDeadline(fullCommand)) {
-            String[] newInput = validateDeadline(fullCommand);
-            System.out.println(newInput[1]);
-            if (isDate(newInput[1])) {
-                LocalDateTime date = parseDate(newInput[1]);
-                if (newInput.length > 2) {
-                    return new AddDeadlineCommand(newInput[0], date, newInput[2]);
-                } else {
-                    return new AddDeadlineCommand(newInput[0], date);
-                }
-            }
-            if (newInput.length > 2) {
-                return new AddDeadlineCommand(newInput[0], newInput[1], newInput[2]);
-            } else {
-                return new AddDeadlineCommand(newInput[0], newInput[1]);
-            }
+            String[] userInput = validateDeadline(fullCommand);
+            return parseDeadline(userInput);
         }
         if (isEvent(fullCommand)) {
-            String[] newInput = validateEvent(fullCommand);
-            if (newInput.length < 3) {
-                return new AddEventCommand(newInput[0], newInput[1]);
-            }
-            if (isDate(newInput[1]) && isDate(newInput[2])) {
-                LocalDateTime date1 = parseDate(newInput[1]);
-                LocalDateTime date2 = parseDate(newInput[2]);
-                if (newInput.length > 3) {
-                    return new AddEventCommand(newInput[0], date1, date2, newInput[3]);
-                }
-                return new AddEventCommand(newInput[0], date1, date2);
-            } else if (newInput[1].contains("-") && newInput[2].contains("-")) {
-                throw new StarException("oopsie! that's the wrong date format!");
-            }
-            if (newInput.length > 2 && !newInput[2].contains("-")) {
-                return new AddEventCommand(newInput[0], newInput[1], newInput[2]);
-            }
-            return new AddEventCommand(newInput[0], newInput[1]);
+            String[] userInput = validateEvent(fullCommand);
+            return parseEvent(userInput);
         }
         else {
             throw StarException.unknownCommand();
@@ -150,7 +116,6 @@ public class Parser {
      */
     public static LocalDateTime parseDate(String input) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
-        System.out.println("hm");
         return LocalDateTime.parse(input, formatter);
 
     }
@@ -212,5 +177,50 @@ public class Parser {
             strArr[2] = strArr[2].replace("tag ", "");
         }
         return strArr;
+    }
+
+    private static Command parseDeadline(String[] newInput) {
+        if (isDate(newInput[1])) {
+            LocalDateTime date = parseDate(newInput[1]);
+            if (newInput.length > 2) {
+                return new AddDeadlineCommand(newInput[0], date, newInput[2]);
+            } else {
+                return new AddDeadlineCommand(newInput[0], date);
+            }
+        }
+        if (newInput.length > 2) {
+            return new AddDeadlineCommand(newInput[0], newInput[1], newInput[2]);
+        } else {
+            return new AddDeadlineCommand(newInput[0], newInput[1]);
+        }
+    }
+
+    private static Command parseTodo(String[] arr) {
+        if (arr.length == 2) {
+            System.out.println(arr[1]);
+            return new AddToDoCommand(arr[0], arr[1]);
+        }
+        System.out.println(arr[0]);
+        return new AddToDoCommand(arr[0]);
+    }
+
+    private static Command parseEvent(String[] newInput) throws StarException {
+        if (newInput.length < 3) {
+            return new AddEventCommand(newInput[0], newInput[1]);
+        }
+        if (isDate(newInput[1]) && isDate(newInput[2])) {
+            LocalDateTime date1 = parseDate(newInput[1]);
+            LocalDateTime date2 = parseDate(newInput[2]);
+            if (newInput.length > 3) {
+                return new AddEventCommand(newInput[0], date1, date2, newInput[3]);
+            }
+            return new AddEventCommand(newInput[0], date1, date2);
+        } else if (newInput[1].contains("-") && newInput[2].contains("-")) {
+            throw new StarException("oopsie! that's the wrong date format!");
+        }
+        if (newInput.length > 2 && !newInput[2].contains("-")) {
+            return new AddEventCommand(newInput[0], newInput[1], newInput[2]);
+        }
+        return new AddEventCommand(newInput[0], newInput[1]);
     }
 }

@@ -12,6 +12,10 @@ public class Star {
     private Ui ui;
     private boolean isExit = false;
 
+    /**
+     * Constructs a new instance of the chatbot Star.
+     *
+     */
     public Star(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);

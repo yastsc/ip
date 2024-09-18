@@ -53,7 +53,6 @@ public class AddEventCommand extends Command {
         this.tag = tag;
     }
 
-
     /**
      * Constructs an addEventCommand with the Event task description, event date and time and the assigned tag.
      * @param description which is the task description.

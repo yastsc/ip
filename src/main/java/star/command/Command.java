@@ -12,7 +12,6 @@ public class Command {
 
     /**
      * Executes the set of actions within.
-     *
      * @param tasks   which is the task list on which the command is executed.
      * @param ui      which is the UI that is used to interact with the user.
      * @param storage which is the storage used to load and save tasks.

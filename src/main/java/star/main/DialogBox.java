@@ -48,10 +48,22 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Creates a new DialogBox object from the user's side.
+     * @param text the user input.
+     * @param img the icon for the user.
+     * @return the new DialogBox object with the user input.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Creates a new DialogBox object from Star's side.
+     * @param text Star's response to the user input.
+     * @param img the icon for Star.
+     * @return the new DialogBox object with Star's response.
+     */
     public static DialogBox getStarDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
