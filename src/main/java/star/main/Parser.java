@@ -100,9 +100,11 @@ public class Parser {
      * @param input which is the input String to be parsed.
      * @return True if the input String is in date format and False otherwise.
      */
-    public static boolean isDate(String input) {
+    public static boolean isDate(String input) throws StarException {
         String[] splitInput = input.split("-");
-        System.out.println(splitInput[2]);
+        if (splitInput.length == 1) {
+            throw new StarException("oopsie! that seems like a wrong date format :(");
+        }
         boolean inputIsNotNumber = isNotNumber(splitInput[0]) || isNotNumber(splitInput[1])
                 || !isNotNumber(splitInput[2]);
         return splitInput.length == 3 && !inputIsNotNumber;
@@ -136,7 +138,6 @@ public class Parser {
 
         for (int i = 0; i < splitInput.length; i++) {
             splitInput[i] = splitInput[i].trim();
-            System.out.println(splitInput[i]);
         }
 
         boolean blankSplitInput = splitInput[0].isBlank() || splitInput[1].isBlank();
@@ -179,7 +180,7 @@ public class Parser {
         return strArr;
     }
 
-    private static Command parseDeadline(String[] newInput) {
+    private static Command parseDeadline(String[] newInput) throws StarException {
         if (isDate(newInput[1])) {
             LocalDateTime date = parseDate(newInput[1]);
             if (newInput.length > 2) {
@@ -197,10 +198,8 @@ public class Parser {
 
     private static Command parseTodo(String[] arr) {
         if (arr.length == 2) {
-            System.out.println(arr[1]);
             return new AddTodoCommand(arr[0], arr[1]);
         }
-        System.out.println(arr[0]);
         return new AddTodoCommand(arr[0]);
     }
 
@@ -216,7 +215,7 @@ public class Parser {
             }
             return new AddEventCommand(newInput[0], date1, date2);
         } else if (newInput[1].contains("-") && newInput[2].contains("-")) {
-            throw new StarException("oopsie! that's the wrong date format!");
+            throw new StarException("oopsie! that seems like the wrong date format (remember to add the time)!");
         }
         if (newInput.length > 2 && !newInput[2].contains("-")) {
             return new AddEventCommand(newInput[0], newInput[1], newInput[2]);
