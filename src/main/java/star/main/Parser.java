@@ -198,10 +198,10 @@ public class Parser {
     private static Command parseTodo(String[] arr) {
         if (arr.length == 2) {
             System.out.println(arr[1]);
-            return new AddToDoCommand(arr[0], arr[1]);
+            return new AddTodoCommand(arr[0], arr[1]);
         }
         System.out.println(arr[0]);
-        return new AddToDoCommand(arr[0]);
+        return new AddTodoCommand(arr[0]);
     }
 
     private static Command parseEvent(String[] newInput) throws StarException {

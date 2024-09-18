@@ -4,14 +4,13 @@ import star.exception.StarException;
 import star.main.Storage;
 import star.main.TaskList;
 import star.main.Ui;
-import star.task.Task;
 import star.task.Todo;
 
 /**
  * Represents a Command to add a new ToDo task to the task list.
  * Inherits from the Command class.
  */
-public class AddToDoCommand extends Command {
+public class AddTodoCommand extends Command {
     private String description;
     private String tag;
 
@@ -19,7 +18,7 @@ public class AddToDoCommand extends Command {
      * Constructs a new addToDoCommand with the new ToDo task description.
      * @param description which is the description of the task to be added.
      */
-    public AddToDoCommand(String description) {
+    public AddTodoCommand(String description) {
         this.description = description;
     }
 
@@ -28,7 +27,7 @@ public class AddToDoCommand extends Command {
      * @param description which is the description of the task to be added.
      * @param tag which is the tag assigned to the task.
      */
-    public AddToDoCommand(String description, String tag) {
+    public AddTodoCommand(String description, String tag) {
         this.description = description;
         this.tag = tag;
     }
