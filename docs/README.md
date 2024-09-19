@@ -49,7 +49,7 @@ Adds a Todo task with the given description and tag (if applicable).
 
 Format: `todo <TASK DESCRIPTION> [/tag <TAG>]`
 
-> [!TIP]
+> Tip:
 > A Todo task can have 1 or 0 tags. 
 
 Examples:
@@ -64,7 +64,7 @@ Adds a Deadline task with the given description, deadline date and time and tag 
 
 Format: `deadline <TASK DESCRIPTION> /by <DD-MM-YYYY HHmm> [/tag <TAG>]`
 
-> [!TIP]
+> Tip:
 > A Deadline task can have 1 or 0 tags.
 
 Examples:
@@ -81,7 +81,7 @@ Format:
 - `event <TASK DESCRIPTION> /from <DD-MM-YYYY HHmm> /to <DD-MM-YYYY HHmm> [/tag <TAG>]`
 - `event <TASK DESCRIPTION> /at <DD-MM-YYYY HHmm> [/tag <TAG>]`
 
-> [!TIP]
+> Tip:
 > An Event task can have 1 or 0 tags.
 
 Examples:
@@ -104,7 +104,7 @@ Marks the task with the given index in the task list as done.
 
 Format: `mark <TASK INDEX IN LIST>`
 
-> [!NOTE]
+> Note:
 > Index given must be smaller than or equal to the number of tasks currently in your task list.
 
 Examples:
@@ -119,7 +119,7 @@ Unmarks the task with the given index in the task list to make it undone.
 
 Format: `unmark <TASK INDEX IN LIST>`
 
-> [!NOTE]
+> Note:
 > Index given must be smaller than or equal to the number of tasks currently in your task list.
 
 Examples:
@@ -134,7 +134,7 @@ Deletes the task with the given index in the task list.
 
 Format: `delete <TASK INDEX IN LIST>`
 
-> [!NOTE]
+> Note:
 > Index given must be smaller than or equal to the number of tasks currently in your task list.
 
 Examples:
