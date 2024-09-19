@@ -31,7 +31,7 @@ public class Storage {
     }
 
     /**
-     * Method to load tasks from the designated file to the taskList.
+     * Loads tasks from the designated file to the taskList.
      * @return a taskList, which is an ArrayList of Task objects loaded from the file.
      * @throws StarException if an I/O exception occurs while reading the file.
      */
@@ -80,7 +80,7 @@ public class Storage {
     }
 
     /**
-     * Method to save tasks from the taskList to the designated file.
+     * Saves tasks from the taskList to the designated file.
      * @param taskList which is the ArrayList of Task objects to save.
      * @throws StarException if an I/O exception occurs while writing to the file.
      */

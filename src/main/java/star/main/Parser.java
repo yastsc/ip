@@ -111,7 +111,7 @@ public class Parser {
     }
 
     /**
-     * Convert an input String into a LocalDateTime object.
+     * Converts an input String into a LocalDateTime object.
      * @param input which is the input String to be converted.
      * @return LocalDateTime object using the DateTimeFormatter object to convert the input String.
      */
