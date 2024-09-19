@@ -43,6 +43,6 @@ public class StarException extends Exception {
      * @return a new StarException with the given message.
      */
     public static StarException unknownCommand() {
-        return new StarException("oopsie! uh oh, but I don't know what that means :(");
+        return new StarException("oopsie! I don't know what that means :(");
     }
 }

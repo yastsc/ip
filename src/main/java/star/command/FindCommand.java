@@ -10,6 +10,8 @@ import star.main.Ui;
  */
 public class FindCommand extends Command {
     private static final String FIND_MSG = "these tasks match what you were looking for!";
+    private static final String UNFIND_MSG = "none of the tasks in the task list match what "
+            + "you were looking for :(";
     private String keyword;
 
     /**
@@ -22,6 +24,8 @@ public class FindCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        return ui.printList(tasks.findTasks(this.keyword), FIND_MSG);
+        return ((tasks.findTasks(this.keyword)).isEmpty())
+                ? ui.printList(tasks.findTasks(this.keyword), UNFIND_MSG)
+                : ui.printList(tasks.findTasks(this.keyword), FIND_MSG);
     }
 }

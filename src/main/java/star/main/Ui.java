@@ -53,7 +53,7 @@ public class Ui {
 
     public String undoneMsg(Task task) {
         assert task != null;
-        return "oops it seems that this task isn't done yet: \n" + task;
+        return "oopsie it seems that this task isn't done yet: \n" + task;
     }
 
     public String printList(ArrayList<Task> tasks, String message) {
